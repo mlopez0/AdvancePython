@@ -2,6 +2,7 @@
 
 Repository for Advanced Python Programming
 
-Team Members
-Vladimir Semenov
-Marvin Lopez
+Team Members:
+
+- Vladimir Semenov
+- Marvin Lopez
