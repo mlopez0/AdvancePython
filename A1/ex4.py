@@ -9,7 +9,7 @@ Python 3.8.0
 '''
 
 import os
-from A1.common_functions import *
+from common_functions import *
 
 dir_path = ""
 

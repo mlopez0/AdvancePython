@@ -9,12 +9,10 @@ def handle_cd(input_breakdown):
     if input_breakdown[0] == "cd":
         path = input_breakdown[1]
         
-        try:
-            exit_code = os.chdir(path)
-        except FileNotFoundError:
-            log_error("/bin/sh: 1: cd: can't cd to " + path)
+        exit_code = os.chdir(path)
+        return True
     
-    return -1
+    return False
 
 
 def log_error(error):
