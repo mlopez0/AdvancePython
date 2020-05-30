@@ -6,8 +6,8 @@ def exit_terminal():
 
 
 def handle_cd(input_breakdown):
-    if breakdown[0] == "cd":
-        path = breakdown[1]
+    if input_breakdown[0] == "cd":
+        path = input_breakdown[1]
         
         try:
             exit_code = os.chdir(path)
