@@ -9,11 +9,8 @@ Python 3.8.0
 '''
 
 import os
+from A1.common_functions import *
 
-
-def exit_terminal():
-    print("Goodbye!")
-    exit()
 
 while True:
     print("myshell: ", end="")
