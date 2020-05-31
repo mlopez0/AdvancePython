@@ -2,13 +2,12 @@ import os
 import sys
 import subprocess
 
-
 def exit_terminal():
     print("Goodbye!")
     exit()
 
 
-def handle_cd(input_breakdown):
+def handle_cd(_input):
     input_breakdown = _input.split(" ")
 
     if input_breakdown[0] == "cd":
