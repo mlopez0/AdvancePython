@@ -10,11 +10,11 @@ Python 3.8.0
 import os
 from datetime import datetime
 from common_functions import *
+import subprocess
 import sys
 
 
 # This function will be moved to common_functions.py
-
 def action_log(action):
     act = action.split(" ")
     var1= "1"
@@ -43,13 +43,14 @@ while True:
     if _input == "exit":
         exit_terminal()
 
-    os.system(_input)
-    pid = os.getpid()
-    exitcode = os.system(_input)
+    result = subprocess.check_output(_input, shell=True)
+    exitcode = os.system(_input) 
+    pid = os.getpid() # collecting Pid
+    #exitcode = os.system(_input) # collecting exitcode
     log_string = str(_input) + " " + str(pid) + " " + str(exitcode)
-#    print ("log_string")
-#    print (log_string)
+    print ("------------------- log_string ------------------- ls")
+    print (log_string)
+    print ("subproceso")
+    print (result)
 
     action_log(log_string)
-
-
