@@ -27,9 +27,7 @@ while True:
     if _input == "exit":
         exit_terminal()
 
-    breakdown = _input.split(" ")
-
-    if handle_cd(breakdown):
+    if handle_cd(_input):
         continue
 
     os.system(_input)

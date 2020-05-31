@@ -8,10 +8,17 @@ Assignment 1
 Python 3.8.0
 '''
 
-import os
+import sys
+import os, signal
+from io import StringIO
 from common_functions import *
+import subprocess
+
+
+error_log = open("myshell.stderr", "w")
 
 dir_path = ""
+
 
 while True:
     dir_path = get_path_abbreviation(os.getcwd())
@@ -24,12 +31,21 @@ while True:
         print()
         exit_terminal()
 
+
     if _input == "exit":
         exit_terminal()
 
-    breakdown = _input.split(" ")
 
-    if handle_cd(breakdown) > 0:
-        continue
+    try:
+        if handle_cd_sp(_input, error_log):
+            continue
+        output = subprocess.check_call(
+            _input, stderr=error_log, shell=True)
+    except:
+        pass
 
-    os.system(_input)
+
+    
+
+    
+
