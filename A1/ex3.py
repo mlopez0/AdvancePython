@@ -16,24 +16,19 @@ import sys
 
 # This function will be moved to common_functions.py
 def action_log(action):
-    act = action.split(" ")
-    var1= "1"
-#    print(action.split(" "))
+    act = action.split("-*-")
     dateTimeObj = datetime.now()    
     timestampStr = dateTimeObj.strftime("%d-%b-%Y (%H:%M:%S.%f)")
 
     file = open("myshell.log", "a")
-  #  file.write(timestampStr)
-    file.write("["+ timestampStr +"],"+ " cmd: " + act[0] +", args: "+ act[1] + ", stdout: "+ var1 + ", Pid: "+  act[2] + ", exit: "+ act[3] +" \n " )
+    file.write("["+ timestampStr +"],"+ " cmd: " + act[0] +", args: "+ act[1] + ", stdout: "+ act[2] + ", Pid: "+  act[3] + ", exit: "+ act[4] +" \n " )
     file.close()
 
 #action_log("echo \"1\" 9444 0")
 # Special comands \ " should be scaped 
 
-
 while True:
     print("myshell: ", end="")
-
     try:
         _input = input()
     except EOFError:
@@ -43,14 +38,16 @@ while True:
     if _input == "exit":
         exit_terminal()
 
-    result = subprocess.check_output(_input, shell=True)
+    _outcome = subprocess.check_output(_input, shell=True)
+    _outcome = str(_outcome).replace('b\'','').replace('\\n\'','')#.replace('x','')
+
+    outcome = subprocess.run(_input) 
+
     exitcode = os.system(_input) 
     pid = os.getpid() # collecting Pid
     #exitcode = os.system(_input) # collecting exitcode
-    log_string = str(_input) + " " + str(pid) + " " + str(exitcode)
-    print ("------------------- log_string ------------------- ls")
-    print (log_string)
-    print ("subproceso")
-    print (result)
 
+    log_string = str(_input) + "-*-" + "xXx args xXx"+ "-*-" + _outcome + '-*-' + str(pid) + "-*-" + str(exitcode)
+    print ("Cadenota")
+    print (log_string)
     action_log(log_string)
