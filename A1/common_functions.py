@@ -1,6 +1,7 @@
 import os
 import sys
 import subprocess
+from datetime import datetime
 
 def exit_terminal():
     print("Goodbye!")
@@ -56,7 +57,10 @@ def get_path_abbreviation(path):
         
     return abbreviated_path
 
-
-def print_stdout(message, stdout, current_stdout, **options):
-    sys.stdout = stdout
-    print(message, **options)
+def action_log(action):
+    act = action.split("-*-")
+    dateTimeObj = datetime.now()    
+    timestampStr = dateTimeObj.strftime("%d-%b-%Y (%H:%M:%S.%f)")
+    file = open("myshell.log", "a")
+    file.write("["+ timestampStr +"],"+ " cmd: " + act[0] +", args: "+ act[1] + ", stdout: "+ act[2] + ", Pid: "+  act[3] + ", exit: "+ act[4] +" \n " )
+    file.close()
