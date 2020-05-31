@@ -10,11 +10,18 @@ Python 3.8.0
 import os
 from datetime import datetime
 from common_functions import *
-import subprocess
+from subprocess import *
 import sys
 
+''' command name | arguments | lines of output | pid | exit code '''
+
+dir_path = ""
+
 while True:
-    print("myshell: ", end="")
+    dir_path = get_path_abbreviation(os.getcwd())
+
+    print("myshell [" + dir_path + "]: ", end="")
+
     try:
         _input = input()
     except EOFError:
@@ -24,12 +31,17 @@ while True:
     if _input == "exit":
         exit_terminal()
 
-    _outcome = subprocess.check_output(_input, shell=True)
-    _outcome = str(_outcome).replace('b\'','')#.replace('n\'','')
-    outcome = subprocess.run(_input) 
-    exitcode = os.system(_input) 
-    pid = os.getpid() # collecting Pid
-    #exitcode = os.system(_input) # collecting exitcode
+    if handle_cd(_input):
+        continue
 
-    log_string = str(_input) + "-*-" + "xXx args xXx"+ "-*-" + _outcome + '-*-' + str(pid) + "-*-" + str(exitcode)
+    outcome = run(_input, stdout=PIPE, stderr=PIPE, universal_newlines=True, shell=True)
+    pid = Popen("ls") # must be changed
+    pid = pid.pid
+
+'''    print ("This is the comand \t" + str(_input))
+    print ("These are the args \t" + outcome.args)
+    print ("This is the output \t " + outcome.stdout)
+    print ("This is the exit code \t" + str(outcome.returncode))
+'''
+    log_string = str(_input) + "-*-" + outcome.args + "-*-" + outcome.stdout + '-*-' + str(pid) + "-*-" + str(outcome.returncode)
     action_log(log_string)
