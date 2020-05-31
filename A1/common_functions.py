@@ -1,4 +1,7 @@
 import os
+import sys
+import subprocess
+
 
 def exit_terminal():
     print("Goodbye!")
@@ -6,10 +9,29 @@ def exit_terminal():
 
 
 def handle_cd(input_breakdown):
+    input_breakdown = _input.split(" ")
+
     if input_breakdown[0] == "cd":
         path = input_breakdown[1]
         
-        exit_code = os.chdir(path)
+        os.chdir(path)
+        return True
+    
+    return False
+
+
+def handle_cd_sp(_input, error_out=sys.__stderr__):
+    input_breakdown = _input.split(" ")
+
+    if input_breakdown[0] == "cd":
+        path = input_breakdown[1]
+        
+        error_out.seek(0)
+        error_out.truncate(0)
+
+        subprocess.check_output(_input, shell=True, stderr=error_out)
+        os.chdir(path)
+
         return True
     
     return False
@@ -34,3 +56,8 @@ def get_path_abbreviation(path):
             abbreviated_path += directory[0]
         
     return abbreviated_path
+
+
+def print_stdout(message, stdout, current_stdout, **options):
+    sys.stdout = stdout
+    print(message, **options)
