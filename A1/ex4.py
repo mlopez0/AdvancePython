@@ -5,6 +5,8 @@ Vladimir Semenov
 Assignment 1
 "Command line hero"
 
+Part 4. CCleaner
+
 Python 3.8.0
 '''
 
