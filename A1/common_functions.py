@@ -83,7 +83,27 @@ def action_log(action):
     file.write("["+ timestampStr +"],"+ " cmd: " + act[0] +", args: "+ act[1] + ", stdout: "+ act[2] + ", Pid: "+  act[3] + ", exit: "+ act[4] +" \n " )
     file.close()
 
-def error_logger(message):
-    file = open("myshell.stderr","a")
-    file.write(message)
-    file.close()
+def error_logger(message, error_log):
+    error_log.seek(0)
+    error_log.truncate(0)
+    error_log.write(message)
+    error_log.close()
+
+
+def parse_input(_input):
+    _command = _input.split(' ', 1)[0]                  # Return the command 
+
+    try:
+        _argument = _input.split(' ', 1)[1]             # Return the command arguments
+    except IndexError:
+        _argument = '-'
+
+    return _command, _argument
+
+
+def get_pid(shell_output):
+    return shell_output.stdout.partition('\n')[0]            # Return the Pid
+
+
+def build_log_line(_command, _argument, _output_, _pid, returncode):
+    return _command + "-*-" + _argument + "-*-" + _output_.rstrip().lstrip() + '-*-' + _pid + "-*-" + str(returncode)

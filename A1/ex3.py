@@ -11,7 +11,7 @@ Python 3.8.0
 '''
 import os
 from datetime import datetime
-from A1.common_functions import get_path_abbreviation, exit_terminal, handle_cd, action_log
+from common_functions import get_path_abbreviation, exit_terminal, handle_cd, action_log, build_log_line, get_pid, parse_input
 from subprocess import run, PIPE
 import sys
 
@@ -38,19 +38,12 @@ while True:
 
     outcome = run(_input + " & echo $!", stdout=PIPE, stderr=PIPE, universal_newlines=True, shell=True)
 
-    _command = _input.split(' ', 1)[0]                  # Return the command 
+    _command, _argument = parse_input(_input)
 
-    try:
-        _argument = _input.split(' ', 1)[1]             # Return the command arguments
-    except IndexError:
-        _argument = '-'
-    _pid = outcome.stdout.partition('\n')[0]            # Return the Pid
-    _output_ = outcome.stdout.replace(_pid, '')         # Return the output
+    _pid = get_pid(outcome)
+    _output_ = outcome.stdout.replace(_pid, '').rstrip().lstrip()        # Return the output
  
     print (_output_)
 
+    action_log(build_log_line(_command, _argument, _output_, _pid, outcome.returncode))
 
-    
-    log_string = _command + "-*-" + _argument + "-*-" + _output_.rstrip().lstrip() + '-*-' + _pid + "-*-" + str(outcome.returncode)
-
-    action_log(log_string)
