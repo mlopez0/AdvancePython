@@ -38,18 +38,23 @@ while True:
     try:
         if handle_cd_sp(_input, error_log):
             continue
-        run(_input, stderr=error_log, shell=True)
+        outcome = run(_input + " & echo $!", stdout=PIPE, stderr=PIPE, universal_newlines=True, shell=True)
+
+        _command = _input.split(' ', 1)[0]                  # Return the command 
+
+        try:
+            _argument = _input.split(' ', 1)[1]             # Return the command arguments
+        except IndexError:
+            _argument = '-'
+        _pid = outcome.stdout.partition('\n')[0]            # Return the Pid
+        _output_ = outcome.stdout.replace(_pid, '')         # Return the output
+    
+        print (_output_)
+
+
+        
+        log_string = _command + "-*-" + _argument + "-*-" + _output_.rstrip().lstrip() + '-*-' + _pid + "-*-" + str(outcome.returncode)
+
+        action_log(log_string)
     except:
         pass
-
-    outcome = run(_input, stdout=PIPE, stderr=PIPE, universal_newlines=True, shell=True)
-    # pid = Popen("ls") # must be changed
-    pid = 1
-
-    '''    print ("This is the comand \t" + str(_input))
-        print ("These are the args \t" + outcome.args)
-        print ("This is the output \t " + outcome.stdout)
-        print ("This is the exit code \t" + str(outcome.returncode))
-    '''
-    log_string = str(_input) + "-*-" + outcome.args + "-*-" + outcome.stdout + '-*-' + str(pid) + "-*-" + str(outcome.returncode)
-    action_log(log_string)
