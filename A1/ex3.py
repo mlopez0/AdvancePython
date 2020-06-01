@@ -38,10 +38,10 @@ while True:
     pid = Popen("ls") # must be changed
     pid = pid.pid
 
-'''    print ("This is the comand \t" + str(_input))
-    print ("These are the args \t" + outcome.args)
-    print ("This is the output \t " + outcome.stdout)
-    print ("This is the exit code \t" + str(outcome.returncode))
-'''
+    '''    print ("This is the comand \t" + str(_input))
+        print ("These are the args \t" + outcome.args)
+        print ("This is the output \t " + outcome.stdout)
+        print ("This is the exit code \t" + str(outcome.returncode))
+    '''
     log_string = str(_input) + "-*-" + outcome.args + "-*-" + outcome.stdout + '-*-' + str(pid) + "-*-" + str(outcome.returncode)
     action_log(log_string)
