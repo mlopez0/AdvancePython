@@ -49,5 +49,8 @@ while True:
  
     print (_output_)
 
-    log_string = _command + "-*-" + _argument + "-*-" + _output_ + '-*-' + _pid + "-*-" + str(outcome.returncode)
+
+    
+    log_string = _command + "-*-" + _argument + "-*-" + _output_.rstrip().lstrip() + '-*-' + _pid + "-*-" + str(outcome.returncode)
+
     action_log(log_string)
