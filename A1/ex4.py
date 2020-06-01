@@ -11,7 +11,7 @@ Python 3.8.0
 import sys
 import os, signal
 from io import StringIO
-from common_functions import *
+from A1.common_functions import get_path_abbreviation, exit_terminal, handle_cd_sp
 import subprocess
 
 

@@ -11,7 +11,7 @@ Python 3.8.0
 '''
 
 import os
-from common_functions import *
+from A1.common_functions import exit_terminal
 
 
 while True:
