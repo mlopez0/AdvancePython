@@ -84,10 +84,7 @@ def action_log(action):
     file.close()
 
 def error_logger(message, error_log):
-    error_log.seek(0)
-    error_log.truncate(0)
     error_log.write(message)
-    error_log.close()
 
 
 def parse_input(_input):
