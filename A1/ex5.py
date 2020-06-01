@@ -35,24 +35,21 @@ while True:
         exit_terminal()
 
 
-    # try:
-    #     if handle_cd_sp(_input, error_log):
-    #         continue
-    #     subprocess.check_call(
-    #         _input, stderr=error_log, shell=True)
-    # except:
-    #     pass
+    try:
+        if handle_cd_sp(_input, error_log):
+            continue
+        subprocess.run(_input, stderr=error_log, shell=True)
+    except:
+        pass
 
-    if _input.split(" ")[0] == "cd":
-        path = os.getcwd() + "/" + _input.split(" ")[1]
-        if os.path.exists(path):
-            current_directory = path
-    else:
-        subprocess.check_call(
-            _input, cwd=current_directory, stderr=error_log)
+    outcome = run(_input, stdout=PIPE, stderr=PIPE, universal_newlines=True, shell=True)
+    # pid = Popen("ls") # must be changed
+    pid = 1
 
-
-    
-
-    
-
+    '''    print ("This is the comand \t" + str(_input))
+        print ("These are the args \t" + outcome.args)
+        print ("This is the output \t " + outcome.stdout)
+        print ("This is the exit code \t" + str(outcome.returncode))
+    '''
+    log_string = str(_input) + "-*-" + outcome.args + "-*-" + outcome.stdout + '-*-' + str(pid) + "-*-" + str(outcome.returncode)
+    action_log(log_string)

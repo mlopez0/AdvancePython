@@ -35,8 +35,8 @@ while True:
         continue
 
     outcome = run(_input, stdout=PIPE, stderr=PIPE, universal_newlines=True, shell=True)
-    pid = Popen("ls") # must be changed
-    pid = pid.pid
+    # pid = Popen("ls") # must be changed
+    pid = 1
 
     '''    print ("This is the comand \t" + str(_input))
         print ("These are the args \t" + outcome.args)
