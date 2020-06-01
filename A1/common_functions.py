@@ -1,6 +1,7 @@
 import os
 import sys
 import subprocess
+from datetime import datetime
 
 def exit_terminal():
     print("Goodbye!")
