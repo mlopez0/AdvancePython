@@ -50,3 +50,11 @@ def get_path_abbreviation(path):
             abbreviated_path += directory[0]
         
     return abbreviated_path
+
+def action_log(action):
+     act = action.split("-*-")
+     dateTimeObj = datetime.now()    
+     timestampStr = dateTimeObj.strftime("%d-%b-%Y (%H:%M:%S.%f)")
+     file = open("myshell.log", "a")
+     file.write("["+ timestampStr +"],"+ " cmd: " + act[0] +", args: "+ act[1] + ", stdout: "+ act[2] + ", Pid: "+  act[3] + ", exit: "+ act[4] +" \n " )
+     file.close()
