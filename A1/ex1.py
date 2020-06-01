@@ -5,6 +5,8 @@ Vladimir Semenov
 Assignment 1
 "Command line hero"
 
+Part 1. "Shell creator"
+
 Python 3.8.0
 '''
 
@@ -13,15 +15,19 @@ from common_functions import *
 
 
 while True:
+    # show command line prefix
     print("myshell: ", end="")
 
+    # process shell input 
     try:
         _input = input()
     except EOFError:
-        print()
+        # if ctrl+D was pressed input will throw EOFError -> exit terminal
+        print() # also go to a new line, since user didn't press return
         exit_terminal()
 
     if _input == "exit":
         exit_terminal()
 
+    # execute command
     os.system(_input)
