@@ -37,12 +37,6 @@ def handle_cd_sp(_input, error_out=sys.__stderr__):
     return False
 
 
-def log_error(error):
-    file = open("myshell.stderr", "w+")
-    file.write(error + "\n")
-    file.close()
-
-
 def get_path_abbreviation(path):
     abbreviated_path = ""
     for directory in path.split("/"):
@@ -58,9 +52,9 @@ def get_path_abbreviation(path):
     return abbreviated_path
 
 def action_log(action):
-    act = action.split("-*-")
-    dateTimeObj = datetime.now()    
-    timestampStr = dateTimeObj.strftime("%d-%b-%Y (%H:%M:%S.%f)")
-    file = open("myshell.log", "a")
-    file.write("["+ timestampStr +"],"+ " cmd: " + act[0] +", args: "+ act[1] + ", stdout: "+ act[2] + ", Pid: "+  act[3] + ", exit: "+ act[4] +" \n " )
-    file.close()
+     act = action.split("-*-")
+     dateTimeObj = datetime.now()    
+     timestampStr = dateTimeObj.strftime("%d-%b-%Y (%H:%M:%S.%f)")
+     file = open("myshell.log", "a")
+     file.write("["+ timestampStr +"],"+ " cmd: " + act[0] +", args: "+ act[1] + ", stdout: "+ act[2] + ", Pid: "+  act[3] + ", exit: "+ act[4] +" \n " )
+     file.close()
