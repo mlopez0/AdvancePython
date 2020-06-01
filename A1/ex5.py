@@ -9,8 +9,8 @@ Python 3.8.0
 '''
 import os
 from io import StringIO
-from common_functions import *
-import subprocess
+from A1.common_functions import get_path_abbreviation, exit_terminal, handle_cd_sp, action_log
+from subprocess import run, PIPE
 
 
 error_log = open("myshell.stderr", "w")
@@ -38,7 +38,7 @@ while True:
     try:
         if handle_cd_sp(_input, error_log):
             continue
-        subprocess.run(_input, stderr=error_log, shell=True)
+        run(_input, stderr=error_log, shell=True)
     except:
         pass
 
