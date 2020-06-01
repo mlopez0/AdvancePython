@@ -58,3 +58,8 @@ def action_log(action):
      file = open("myshell.log", "a")
      file.write("["+ timestampStr +"],"+ " cmd: " + act[0] +", args: "+ act[1] + ", stdout: "+ act[2] + ", Pid: "+  act[3] + ", exit: "+ act[4] +" \n " )
      file.close()
+
+def error_logger(message):
+    file = open("myshell.stderr","a")
+    file.write(message)
+    file.close()
