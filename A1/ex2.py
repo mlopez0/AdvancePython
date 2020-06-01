@@ -11,7 +11,7 @@ Python 3.8.0
 '''
 
 import os
-from A1.common_functions import get_path_abbreviation, exit_terminal, handle_cd
+from common_functions import get_path_abbreviation, exit_terminal, handle_cd
 
 
 # path displayed after 'myshell' prefix
