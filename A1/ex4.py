@@ -39,7 +39,7 @@ while True:
     try:
         if handle_cd_sp(_input, error_log):
             continue
-        output = subprocess.check_call(
+        subprocess.check_call(
             _input, stderr=error_log, shell=True)
     except:
         pass

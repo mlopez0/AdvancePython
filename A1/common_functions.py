@@ -36,12 +36,6 @@ def handle_cd_sp(_input, error_out=sys.__stderr__):
     return False
 
 
-def log_error(error):
-    file = open("myshell.stderr", "w+")
-    file.write(error + "\n")
-    file.close()
-
-
 def get_path_abbreviation(path):
     abbreviated_path = ""
     for directory in path.split("/"):
@@ -55,8 +49,3 @@ def get_path_abbreviation(path):
             abbreviated_path += directory[0]
         
     return abbreviated_path
-
-
-def print_stdout(message, stdout, current_stdout, **options):
-    sys.stdout = stdout
-    print(message, **options)
