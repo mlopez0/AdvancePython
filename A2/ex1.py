@@ -18,7 +18,7 @@ _filesList = {}
 
 for i in _files:
     start = time.time()
-    os.system("python " + str(i))
+    os.system("python3 " + str(i))
     end = time.time()
     elapsed = end - start
     _filesList[i] = elapsed
