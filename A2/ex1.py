@@ -11,7 +11,7 @@ import time
 import sys
 import os
 import subprocess
-from collections import OrderedDict 
+from collections import OrderedDict
 
 FNULL = open(os.devnull, "w")
 
@@ -23,9 +23,7 @@ check_no_arguments()
 
 for i in _files:
     start = time.time()
-    # os.system("python3 " + str(i))
     subprocess.call("python3 " + str(i), stdout=FNULL, cwd=os.getcwd(), shell=True)
-    # subprocess.run("ls")
     end = time.time()
     elapsed = end - start
     _filesList[i] = elapsed
