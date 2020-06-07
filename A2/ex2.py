@@ -21,7 +21,7 @@ _filesList = {}
 
 
 if (_nfiles >1):
-    _file = _files[0].replace(".py","") 
+    _file = _files[1].replace(".py","")
     dis.dis(__import__(_file))
 
 else:
