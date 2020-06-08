@@ -55,9 +55,42 @@ def compile_mode(arguments):
         throw_syntax_error()
 
 
+def print_py_bc(py_file):
+    code = open(py_file, "r")
+    bytecode = dis.Bytecode(code.read())
+    code.close()
+
+    for instruction in bytecode:
+        print(instruction.opname, instruction.argval)
+
+
+def print_pyc_bc(pyc_file):
+    file = open(pyc_file, "rb")
+    bytecode = file.read(header_size)
+    code = marshal.load(file)
+    file.close()
+    bytecode = dis.Bytecode(code)
+
+    for instruction in bytecode:
+        print(instruction.opname, instruction.argval)
+
+
+def print_s_bc(string):
+    bytecode = dis.Bytecode(string)
+
+    for instruction in bytecode:
+        print(instruction.opname, instruction.argval)
+
+
 def print_mode(arguments):
-    # TODO: Rewrite manually from ex3
-    pass
+    if arguments[0] == "-py":
+        print_py_bc(arguments[1])
+    elif arguments[0] == "-pyc":
+        print_pyc_bc(arguments[1])
+    elif arguments[0] == "-s":
+        print_s_bc(arguments[1])
+    else:
+        throw_syntax_error()
 
 
 def order_files_by_peaks(table):
