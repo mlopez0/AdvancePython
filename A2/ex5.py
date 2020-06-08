@@ -60,6 +60,16 @@ def print_mode(arguments):
     pass
 
 
+def order_files_by_peaks(table):
+    file_peaks = {}
+
+    for file in table.keys():
+        file_peaks[file] = max(table[file].values())
+
+    return sorted(file_peaks, key=file_peaks.get)
+
+
+
 def compare_mode(files):
     table = {filename: {} for filename in files}
 
@@ -77,8 +87,9 @@ def compare_mode(files):
 
 def print_table(table_dict):
     opnames = set().union(*[opnames for opnames in table_dict.values()])
+    files_in_order = order_files_by_peaks(table_dict)
     print(fill("INSTRUCTION"), end="")
-    for filename in table_dict.keys():
+    for filename in files_in_order:
         print(fill("| " + filename), end="")
 
     print()

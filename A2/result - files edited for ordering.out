@@ -1,0 +1,9 @@
+INSTRUCTION  | file2.py   | file3.py   | file1.py   
+CALL_FUNCTION  2            2            2          
+STORE_NAME     3            2            2          
+MAKE_FUNCTION  1            1            1          
+POP_TOP        1            1            1          
+LOAD_CONST     7            5            5          
+LOAD_NAME      2            2            2          
+IMPORT_NAME    2            1            1          
+RETURN_VALUE   1            1            1          
