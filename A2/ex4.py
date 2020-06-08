@@ -38,14 +38,22 @@ def throw_syntax_error():
     print("compile")
     print("\t-py file.py\tcompile file into bytecode and store it as file.pyc")
     print("\t-s \"src\"\tcompile src into bytecode and store it as out.pyc")
+    print()
+    print("print")
+    print ("\t" + "-py src.py      produce human-readable bytecode from python file")
+    print ("\t" + "-pyc src.pyc    produce human-readable bytecode from compiled .pyc file")
+    print ("\t" + "-s \"src\" "+ "\t" +"produce human-readable bytecode from normal string")
+
     exit(2)
 
 def clean_temp_files():
+    """Removes __tmp__.py created as temporal code storage for compiling pyc from string"""
     if os.path.exists("__tmp__.py"):
         os.remove("__tmp__.py")
 
 
 def compile_string(string):
+    """Compiles string as out.pyc files"""
     outputFile = "out.pyc"
     subprocess.call('echo "' + string + '" > __tmp__.py', shell=True)
     py_compile.compile("__tmp__.py", outputFile)
@@ -53,11 +61,13 @@ def compile_string(string):
 
 
 def compile_file(filename):
+    """Compiles .pyc out of .py file. Input: <filename>.py"""
     outputFile = filename.split(".")[0] + ".pyc"
     py_compile.compile(filename, outputFile)
 
 
 def compile_mode(arguments):
+    """Pipes to compile functions based on short argument. Throws error if flags are incorrect"""
     if arguments[0] == "-py":
         compile_file(arguments[1])
     elif arguments[0] == "-s":
@@ -67,6 +77,7 @@ def compile_mode(arguments):
 
 
 def print_py_bc(py_file):
+    """Prints opnames and arguments for .py file"""
     code = open(py_file, "r")
     bytecode = dis.Bytecode(code.read())
     code.close()
@@ -76,6 +87,7 @@ def print_py_bc(py_file):
 
 
 def print_pyc_bc(pyc_file):
+    """Prints opnames and arguments for .pyc file"""
     file = open(pyc_file, "rb")
     bytecode = file.read(header_size)
     code = marshal.load(file)
@@ -87,6 +99,7 @@ def print_pyc_bc(pyc_file):
 
 
 def print_s_bc(string):
+    """Prints opnames and arguments for a string"""
     bytecode = dis.Bytecode(string)
 
     for instruction in bytecode:
@@ -94,6 +107,7 @@ def print_s_bc(string):
 
 
 def print_mode(arguments):
+    """Pipes to print functions based on short argument. Throws error if flags are incorrect"""
     if arguments[0] == "-py":
         print_py_bc(arguments[1])
     elif arguments[0] == "-pyc":
@@ -105,6 +119,7 @@ def print_mode(arguments):
 
 
 def parse_options(arguments):
+    """Pipes to compile, print or compare mode functions"""
     if arguments[0] == "compile":
         compile_mode(arguments[1:])
     elif arguments[0] == "print":
@@ -113,7 +128,7 @@ def parse_options(arguments):
         throw_syntax_error()
 
 
-if (len(sys.argv) == 1) or sys.argv[1] not in ("compile", "print"):
+if (len(sys.argv) == 1):
     throw_syntax_error()
 
 
