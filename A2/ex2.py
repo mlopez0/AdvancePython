@@ -36,14 +36,13 @@ header_sizes = [
 header_size = next(s for s, v in reversed(header_sizes) if sys.version_info >= v)
 
 if (_nfiles >1):
-    #_file = _files[1].replace(".py","")
     _file = _files[1]
-    file = open(_file, "rb")
-    code = file.read(header_size)
-    #code = marshal.load(file)
-    file.close()
-    dis.dis(code)
-#    dis.dis(__import__(_file))
+    code = open(_file, "r")
+    bytecode = dis.Bytecode(code.read())
+    code.close()
+
+    for instruction in bytecode:
+        print(instruction.opname, instruction.argval)
 
 else:
     print ("usage: ex2.py -py src.py")

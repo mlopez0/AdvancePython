@@ -39,17 +39,28 @@ header_sizes = [
 header_size = next(s for s, v in reversed(header_sizes) if sys.version_info >= v)
 
 if _opt == "-py":
-    _file = _files[1].replace(".py","")
-    dis.dis(__import__(_file))
+    _file = _files[1]
+    code = open(_file, "r")
+    bytecode = dis.Bytecode(code.read())
+    code.close()
+
+    for instruction in bytecode:
+        print(instruction.opname, instruction.argval)
+
 elif _opt == "-pyc": 
     _file = _files[1]
     file = open(_file, "rb")
     bytecode = file.read(header_size)
     code = marshal.load(file)
     file.close()
-    dis.dis(code) 
+    bytecode = dis.Bytecode(code)
+
+    for instruction in bytecode:
+        print(instruction.opname, instruction.argval)
+
 elif _opt == "-s": 
     bytecode = dis.dis(_file)
+
 else:
     print ("usage: ex2.py -formay src")
     print ("This program ...")
