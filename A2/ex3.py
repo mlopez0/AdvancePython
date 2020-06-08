@@ -59,7 +59,11 @@ elif _opt == "-pyc":
         print(instruction.opname, instruction.argval)
 
 elif _opt == "-s": 
-    bytecode = dis.dis(_file)
+    bytecode = dis.Bytecode(_file)
+
+    for instruction in bytecode:
+        print(instruction.opname, instruction.argval)
+
 
 else:
     print ("usage: ex2.py -formay src")
