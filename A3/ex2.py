@@ -25,36 +25,40 @@ class Capturing(list):
         sys.stdout = self._stdout
 
 
+def print_multiline_cell(lines, strip_line = False):
+    for line in lines:
+        line = line if not strip_line else line.strip()
+        print("\t", line.replace("\n",""))
+    print()
+
+
+def print_multiline_row(label, lines, strip_line=False):
+    print(label + ":", end="")
+    print_multiline_cell(lines, strip_line)
+
+
 def reflect(function):
 
     def wrapper(*args, **kwrd):
-        positional_args = []
-        keyworded_args = []
+        with Capturing() as output:
+            function(*args, **kwrd)
 
         print("Name:\t", function.__name__)
         print("Type:\t", type(function))
-        print("Sign:\t", inspect.signature(function))
-        print()
+        print("Sign:\t", inspect.signature(function), end="\n\n")
+        
         print("Args:", end="")
+
         if locals()['args']:
             print("\tpositional", locals()['args'])
         if locals()['kwrd']:
             print("\tkey=worded", locals()['kwrd'])
+
         print()
-        print("Doc:", end="")
-        for line in function.__doc__.split('\n')[1:]:
-            print("\t", line.strip())
 
-        print("Source:", end="")
-        for line in inspect.getsourcelines(function)[0]:
-            print("\t", line)
-
-        print("Output:", end="")
-        with Capturing() as output:
-            function(*args, **kwrd)
-
-        for line in output:
-            print("\t", line)
+        print_multiline_row("Doc", function.__doc__.split('\n')[1:-1], True)
+        print_multiline_row("Source", inspect.getsourcelines(function)[0])
+        print_multiline_row("Output", output)
 
     return wrapper
 
