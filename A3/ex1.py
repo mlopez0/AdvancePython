@@ -15,8 +15,9 @@ import inspect
 # os.system("cat " + __file__)
 
 def reflect(function):
-    print(inspect.getsource(function).replace("@reflect\n", ""))
-    return function
+    def wrapper(*args, **kwrd):
+        print(inspect.getsource(function).replace("@reflect\n", ""))
+    return wrapper
 
 
 @reflect
