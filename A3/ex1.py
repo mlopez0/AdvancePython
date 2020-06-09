@@ -9,12 +9,11 @@ Python 3.8.0
 '''
 
 import inspect
-# print (open(__file__).read()) # smallest python program that can print its own source code but it is not a quine because a quine should not use open() function to print out its source code.
-
-# import os
-# os.system("cat " + __file__)
 
 def reflect(function):
+    """ It is considered a quine since this program takes no input, but it produces an output.
+    Displaying it own source code
+    """
     def wrapper(*args, **kwrd):
         print(inspect.getsource(function).replace("@reflect\n", ""))
     return wrapper
