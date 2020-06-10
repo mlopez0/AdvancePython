@@ -1,0 +1,58 @@
+Name:	 foo
+Type:	 <class 'function'>
+Sign:	 (bar1, bar2='')
+
+Args:	positional (None,)
+	key=worded {'bar2': ''}
+
+Doc:	 This function does nothing useful
+	 :param bar1: description
+	 :param bar2: description
+
+Source:	 @reflect
+	 def foo(bar1, bar2=""):
+	     """
+	     This function does nothing useful
+	     :param bar1: description
+	     :param bar2: description
+	     """
+	     print("some\nmultiline\noutput")
+
+Output:	 some
+	 multiline
+	 output
+
+Name:	 reflect
+Type:	 <class 'function'>
+Sign:	 (function)
+
+Args:	positional (<function reflect at 0x100ceaa60>,)
+
+Doc:	 None
+
+Source:	 def reflect(function):
+	 
+	     def wrapper(*args, **kwrd):
+	         with Capturing() as output:
+	             function(*args, **kwrd)
+	 
+	         print("Name:\t", function.__name__)
+	         print("Type:\t", type(function))
+	         print("Sign:\t", inspect.signature(function), end="\n\n")
+	         
+	         print("Args:", end="")
+	 
+	         if locals()['args']:
+	             print("\tpositional", locals()['args'])
+	         if locals()['kwrd']:
+	             print("\tkey=worded", locals()['kwrd'])
+	 
+	         print()
+	 
+	         print_multiline_row("Doc", function.__doc__.split('\n')[1:-1] if function.__doc__ else ["\tNone"], True)
+	         print_multiline_row("Source", inspect.getsourcelines(function)[0])
+	         print_multiline_row("Output", output)
+	 
+	     return wrapper
+
+Output:	None
