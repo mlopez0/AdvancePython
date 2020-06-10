@@ -84,7 +84,9 @@ def foo(bar1, bar2=""):
 
 if __name__ == "__main__":
     foo(None, bar2="")
-    # Workaround: reflect(reflect) will return decorator reflect with passed argument reflect (What?). 
+    # Workaround: reflect(reflect) will return decorator reflect with passed argument reflect. 
     # Then we call decorator on reflect
-    # TODO: Add explanation, why it's not possible via simple @reflect
+    # Is not possible to apply the reflect decorator againts it owns definition since
+    # decorators are applied during the definition of the function they are attached to and not 
+    # during instantiation.
     reflect(reflect)(reflect)
