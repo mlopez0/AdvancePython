@@ -25,11 +25,6 @@ class Capturing(list):
         sys.stdout = self._stdout
 
 
-def label(text, cell_width=13):
-    # TODO: Delete if not used at the end
-    return text[:13] if len(text) > 13 else text + (" " * (13 - len(text)))
-
-
 def print_multiline_cell(lines, strip_line = False):
     if not lines:
         print("\tNone")
@@ -84,9 +79,9 @@ def foo(bar1, bar2=""):
 
 if __name__ == "__main__":
     foo(None, bar2="")
-    # Workaround: reflect(reflect) will return decorator reflect with passed argument reflect. 
-    # Then we call decorator on reflect
-    # Is not possible to apply the reflect decorator againts it owns definition since
+    # @reflect on reflect workaround: reflect(reflect) will return decorator reflect with passed argument reflect. 
+    # Then we call decorator on reflect function.
+    # It's not possible to apply the reflect decorator againts it owns definition since
     # decorators are applied during the definition of the function they are attached to and not 
     # during instantiation.
     reflect(reflect)(reflect)

@@ -46,7 +46,6 @@ def reflect(function):
         print("Sign:\t", inspect.signature(function), end="\n\n")
         
         print("Args:", end="")
-        # TODO: Add None maybe?
         if locals()['args']:
             print("\tpositional", locals()['args'])
         if locals()['kwrd']:
