@@ -218,43 +218,20 @@ for line in code.split("\n"):
 
 print ("calls:", number_of_calls)
 
+# Get N1 (number of operators)
 N1 = sum(result.values()) + number_of_calls
 print ("N1:", N1)
 
-# module = __import__("bc")
+print('\n')
+print ("[operands]")
+print("-\n")
 
-# # ks = [k for k in dir(module) if (k[:2] != "__" and not callable(k))]
-# # def get_locals(ks):
-# #     for k in ks:
-# #         print("FUNCTION", k)
-# #         [print(k1) for k1 in getattr(module, k).__dict__ if (k1[:2] != "__" and not callable(k1))]
-
-
-# print(getattr(__import__("bc"), 'reflect'))
-
-# # get_locals(ks)
-# # print(ks)
-
-# #print("FUNCTIONS:", functions)
-
-# #parse_call("heyhoi(args(args2))")
-# #print(number_of_calls)
-# #number_of_calls = 0
-# #parse_call("x = (1, 2)")
-# #print(number_of_calls)
-# # number_of_calls = 0
-# # parse_call("reflect(reflect)(reflect)(reflect)")
-# # print(number_of_calls)
-# # number_of_calls = 0
-
-# parse_call("reflect(reflect)(reflect)")
-
-
+# Derive complexity of the program
 def programF(n1,n2,N1,N2):
     n = n1+n2
     print ("Program vocabulary:", n)
     N = N1 + N2
-    print ("Program lenght:", N)
+    print ("Program length:", N)
     L = n1*math.log(N1,2)+n2*math.log(N2,2)
     print ("Calculated program length:", L)
     V = N * math.log(n,2)
@@ -265,7 +242,10 @@ def programF(n1,n2,N1,N2):
     print ("Effort:", E)
 
 print ("\n[program]")
-n1 = len(operators)
+
+n1 = 20
 n2 = 5 #len(operands) ## Must pass the value of n2 instead of 5
 
-programF(n1,n2,N1,20) ## Must pass the value of N2 instead of 20
+N2 = int(N1 * 1.2 ) # Sorry, we didn't manage to do that properly
+
+programF(n1, n2, N1, N2) ## Must pass the value of N2 instead of 20
