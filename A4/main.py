@@ -5,6 +5,62 @@ code = file.read()
 
 end = len(code)
 
+functions = []
+number_of_calls = 0
+
+
+def add_calls():
+    global number_of_calls
+    number_of_calls += 1
+
+def save_function(line):
+    name = line.replace("def", "")[:line.find("(") - 3].strip()
+    if not (name.startswith("__") and name.endswith("__")):
+        functions.append(name)
+
+
+def is_letter(char):
+    return ord(char) <= 122 or ord(char) >= 97 or ord(char) <= 90 or ord(char) >= 65
+
+
+def is_digit(char):
+    return ord(char) >= 48 or ord(char) <= 56
+
+def find_closing_bracket(line):
+    if line.find("(") < line.find(")"):
+        return find_closing_bracket(line[line.find(")")+1:])
+    
+    return line.find(")")
+
+def parse_call(line):
+    if line.strip() == "":
+        return ""
+
+    open_brackets = line.find("(")
+    if (open_brackets) == -1:
+        return
+
+
+    allowed_caller = lambda x: ord(x) == 41 or is_letter(x) or is_digit(x)
+    i = len(line[:open_brackets])
+    arguments = line[open_brackets + 1:find_closing_bracket(line)]
+
+    while i != 0:
+        char = line[i]
+        if allowed_caller(char):
+            add_calls()
+            return parse_call(arguments)
+        elif char == " ":
+            i -= 1
+        elif not allowed_caller(char):
+            return parse_call(arguments)
+        
+    return parse_call(arguments)
+
+
+# def parse_calls(line):
+#     closest_bracket = line.find("(")
+
 
 def rm_neg(number):
     if number < 0:
@@ -37,8 +93,6 @@ def remove_inline_comments(code):
     for i in range(len(lines)):
         
         lines[i] = lines[i].replace(parse_line_comment(lines[i]), "")
-        # if parse_line_comment(lines[i]):
-        #     print("LINE", lines[i])
 
     return '\n'.join(lines)
 
@@ -70,7 +124,11 @@ def get_closest_operator2(line, inside_string=False, string_mark=""):
         closest_quote = sorted(string_borders, key=lambda op: rm_neg(line.find(op)))[0]
         return get_closest_operator2(line[string_border + len(closest_quote):], True, closest_quote)
 
-    
+    if closest_operator == 'def':
+        # print(line[op_id:line.find('\n', op_id)])
+        save_function(line[op_id:line.find('\n', op_id)])
+
+
     current_result = {get_alias(closest_operator): 1}
     recursive_result = get_closest_operator2(line[op_id + len(closest_operator):])
     return {k: current_result.get(k, 0) + recursive_result.get(k, 0) for k in set(current_result) | set(recursive_result)}
@@ -80,6 +138,17 @@ code = remove_inline_comments(code)
 pointer = 0
 
 
-result = get_closest_operator2(code)
+# result = get_closest_operator2(code)
 
-print(result)
+# print("OPERATORS:", result)
+# print("FUNCTIONS:", functions)
+
+parse_call("heyhoi (((print('something'))))")
+print(number_of_calls)
+number_of_calls = 0
+parse_call("x = (1, 2)")
+print(number_of_calls)
+number_of_calls = 0
+parse_call("reflect(reflect)(reflect)")
+print(number_of_calls)
+number_of_calls = 0
