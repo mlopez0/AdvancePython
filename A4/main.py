@@ -157,16 +157,19 @@ code = remove_inline_comments(code)
 pointer = 0
 
 
-# result = get_closest_operator2(code)
+result = get_closest_operator2(code)
 
-# print("OPERATORS:", result)
-# print("FUNCTIONS:", functions)
+print ("[OPERATORS]")
+for x,z in result.items():
+    print (x, ": ",z)
 
-parse_call("heyhoi(args(args2))")
-print(number_of_calls)
-number_of_calls = 0
-parse_call("x = (1, 2)")
-print(number_of_calls)
+#print("FUNCTIONS:", functions)
+
+#parse_call("heyhoi(args(args2))")
+#print(number_of_calls)
+#number_of_calls = 0
+#parse_call("x = (1, 2)")
+#print(number_of_calls)
 # number_of_calls = 0
 # parse_call("reflect(reflect)(reflect)(reflect)")
 # print(number_of_calls)
