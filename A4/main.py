@@ -58,6 +58,8 @@ def parse_call(line):
     if (open_brackets) == -1:
         return
 
+    current_line = line[:find_closing_bracket(line[open_brackets + 1:])]
+    print("CURR", current_line)
     i = len(line[:open_brackets-1])
     arguments = line[open_brackets + 1:find_closing_bracket(line[open_brackets + 1:])]
     print("ARGS", arguments)
@@ -73,12 +75,9 @@ def parse_call(line):
             i -= 1
         elif not allowed_caller(char):
             return parse_call(arguments)
-        
-    return parse_call(arguments)
-
-
-# def parse_calls(line):
-#     closest_bracket = line.find("(")
+    
+    for argument in arguments.split(","):
+        parse_call(argument)
 
 
 def rm_neg(number):
@@ -161,15 +160,3 @@ pointer = 0
 
 # print("OPERATORS:", result)
 # print("FUNCTIONS:", functions)
-
-parse_call("heyhoi(args(args2))")
-print(number_of_calls)
-number_of_calls = 0
-parse_call("x = (1, 2)")
-print(number_of_calls)
-# number_of_calls = 0
-# parse_call("reflect(reflect)(reflect)(reflect)")
-# print(number_of_calls)
-# number_of_calls = 0
-
-# parse_call("reflect(reflect)(reflect)")
