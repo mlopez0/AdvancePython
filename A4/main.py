@@ -1,4 +1,5 @@
 from enums import *
+import math
 
 file = open("bc.py", "r")
 code = file.read()
@@ -217,7 +218,8 @@ for line in code.split("\n"):
 
 print ("calls:", number_of_calls)
 
-print ("N1:", sum(result.values()) + number_of_calls)
+N1 = sum(result.values()) + number_of_calls
+print ("N1:", N1)
 
 # module = __import__("bc")
 
@@ -245,4 +247,25 @@ print ("N1:", sum(result.values()) + number_of_calls)
 # # print(number_of_calls)
 # # number_of_calls = 0
 
-# # parse_call("reflect(reflect)(reflect)")
+# parse_call("reflect(reflect)(reflect)")
+
+
+def programF(n1,n2,N1,N2):
+    n = n1+n2
+    print ("Program vocabulary:", n)
+    N = N1 + N2
+    print ("Program lenght:", N)
+    L = n1*math.log(N1,2)+n2*math.log(N2,2)
+    print ("Calculated program length:", L)
+    V = N * math.log(n,2)
+    print ("Volume:", V)
+    D = (n1/2)*(N2/n2)
+    print ("Difficulty:", D)
+    E = D*V
+    print ("Effort:", E)
+
+print ("\n[program]")
+n1 = len(operators)
+n2 = 5 #len(operands) ## Must pass the value of n2 instead of 5
+
+programF(n1,n2,N1,20) ## Must pass the value of N2 instead of 20

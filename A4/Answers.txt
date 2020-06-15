@@ -1,0 +1,9 @@
+Question #4
+
+Logarithms base 2 are bast used in maths and others fiels, in computer science the binary logarithms is used 
+to compute the complexity.
+
+Logarithms are valuable for describing algorithms that divide a problem into smaller ones, and join 
+the solutions of the subproblems. The logarithm difference between two small numbers is large
+although the logarithm difference between two large numbers is small. 
+
