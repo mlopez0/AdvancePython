@@ -20,19 +20,37 @@ def save_function(line):
 
 
 def is_letter(char):
-    return ord(char) <= 122 or ord(char) >= 97 or ord(char) <= 90 or ord(char) >= 65
+    return (ord(char) <= 122 and ord(char) >= 97) or (ord(char) <= 90 and ord(char) >= 65)
 
 
 def is_digit(char):
-    return ord(char) >= 48 or ord(char) <= 56
+    return ord(char) >= 48 and ord(char) <= 56
 
 def find_closing_bracket(line):
+    print("CLOS", line)
     if line.find("(") < line.find(")"):
         return find_closing_bracket(line[line.find(")")+1:])
     
     return line.find(")")
 
+
+# def find_prev_char(line, position):
+#     while i != 0:
+#         char = line[i]
+#         if allowed_caller(char):
+#             add_calls()
+#             return parse_call(arguments)
+#         elif char == " ":
+#             i -= 1
+#         elif not allowed_caller(char):
+#             return parse_call(arguments)
+
+def allowed_caller(char):
+    return char ==")" or is_letter(char) or is_digit(char)
+
+
 def parse_call(line):
+    print("LINE", line)
     if line.strip() == "":
         return ""
 
@@ -40,14 +58,15 @@ def parse_call(line):
     if (open_brackets) == -1:
         return
 
-
-    allowed_caller = lambda x: ord(x) == 41 or is_letter(x) or is_digit(x)
-    i = len(line[:open_brackets])
-    arguments = line[open_brackets + 1:find_closing_bracket(line)]
+    i = len(line[:open_brackets-1])
+    arguments = line[open_brackets + 1:find_closing_bracket(line[open_brackets + 1:])]
+    print("ARGS", arguments)
 
     while i != 0:
         char = line[i]
+        print(line, char, ord(char))
         if allowed_caller(char):
+            print(char, ord(char))
             add_calls()
             return parse_call(arguments)
         elif char == " ":
@@ -143,12 +162,14 @@ pointer = 0
 # print("OPERATORS:", result)
 # print("FUNCTIONS:", functions)
 
-parse_call("heyhoi (((print('something'))))")
+parse_call("heyhoi(args(args2))")
 print(number_of_calls)
 number_of_calls = 0
 parse_call("x = (1, 2)")
 print(number_of_calls)
-number_of_calls = 0
-parse_call("reflect(reflect)(reflect)")
-print(number_of_calls)
-number_of_calls = 0
+# number_of_calls = 0
+# parse_call("reflect(reflect)(reflect)(reflect)")
+# print(number_of_calls)
+# number_of_calls = 0
+
+# parse_call("reflect(reflect)(reflect)")
