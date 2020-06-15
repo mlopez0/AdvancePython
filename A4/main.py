@@ -13,74 +13,97 @@ def add_calls():
     global number_of_calls
     number_of_calls += 1
 
+
 def save_function(line):
+    """
+    Increments number of functions defined in code
+    """
     name = line.replace("def", "")[:line.find("(") - 3].strip()
     if not (name.startswith("__") and name.endswith("__")):
         functions.append(name)
 
 
 def is_letter(char):
+    """
+    Returns false if char is letter
+    """
     return (ord(char) <= 122 and ord(char) >= 97) or (ord(char) <= 90 and ord(char) >= 65)
 
 
 def is_digit(char):
+    """
+    Returns true if char is digit
+    """
     return ord(char) >= 48 and ord(char) <= 56
 
 def find_closing_bracket(line):
-    print("CLOS", line)
+    """
+    Finds closing bracket (parentheses) for a line (skips internal parentheses)
+    """
     if line.find("(") < line.find(")"):
         return find_closing_bracket(line[line.find(")")+1:])
     
     return line.find(")")
 
 
-# def find_prev_char(line, position):
-#     while i != 0:
-#         char = line[i]
-#         if allowed_caller(char):
-#             add_calls()
-#             return parse_call(arguments)
-#         elif char == " ":
-#             i -= 1
-#         elif not allowed_caller(char):
-#             return parse_call(arguments)
-
 def allowed_caller(char):
-    return char ==")" or is_letter(char) or is_digit(char)
+    """
+    Returns true if char is an allowed ending of the function name
+    """
+    return char ==")" or char=="_" or is_letter(char) or is_digit(char)
 
 
 def parse_call(line):
-    print("LINE", line)
+    """
+    Parses calls in a line of code. Doesn't work with nested (f()()) calls
+    """
     if line.strip() == "":
         return ""
 
+    # Find open brackets in line
     open_brackets = line.find("(")
     if (open_brackets) == -1:
         return
 
+    # Trim line to closing brackets
     current_line = line[:find_closing_bracket(line[open_brackets + 1:])]
-    print("CURR", current_line)
+    # i pointer to the end of string
     i = len(line[:open_brackets-1])
-    arguments = line[open_brackets + 1:find_closing_bracket(line[open_brackets + 1:])]
-    print("ARGS", arguments)
-
+    # Get what inside the brackets
+    arguments = line[open_brackets + 1:find_closing_bracket(line[open_brackets + 1:])].split(",")
+    # Search for function name
     while i != 0:
         char = line[i]
-        print(line, char, ord(char))
+
+        # Check if function name found
         if allowed_caller(char):
-            print(char, ord(char))
+            # Increment calls number
             add_calls()
-            return parse_call(arguments)
+            # Search calls in arguments
+            return search_calls_in_args(arguments)
+            
+        # Skip whitespaces
         elif char == " ":
             i -= 1
+        
+        # If it wasn't a call, search arguments for calls
+        # Also break loop early
         elif not allowed_caller(char):
-            return parse_call(arguments)
+            return search_calls_in_args(arguments)
     
-    for argument in arguments.split(","):
-        parse_call(argument)
+    # Anyway we need it
+    return search_calls_in_args(arguments)
+
+
+def search_calls_in_args(args):
+    for arg in args:
+        parse_call(arg)
 
 
 def rm_neg(number):
+    """
+    Returns index beyond code length to eliminate negative numbers during sorting
+    """
     if number < 0:
         return end + 1
     
@@ -88,6 +111,9 @@ def rm_neg(number):
 
 
 def parse_line_comment(line, inside_string=False, string_mark=""):
+    """
+    Find inline comment in a line and return inline comment as a string
+    """
     if inside_string:
         line = line[line.find(string_mark) + len(string_mark):]
         
@@ -107,6 +133,9 @@ def parse_line_comment(line, inside_string=False, string_mark=""):
 
 
 def remove_inline_comments(code):
+    """
+    Clean code from inline comments. Returns code without inline comments.
+    """
     lines = code.split('\n')
     for i in range(len(lines)):
         
@@ -116,6 +145,9 @@ def remove_inline_comments(code):
 
 
 def get_alias(operator_name):
+    """
+    For operators no named as they are (+, ==, etc.) find corresponding name
+    """
     if operator_name in arithmetics:
         return 'arithmetics'
     elif operator_name in boolean:
@@ -126,37 +158,91 @@ def get_alias(operator_name):
     return operator_name
 
 
-def get_closest_operator2(line, inside_string=False, string_mark=""):
-    if inside_string:
-        line = line[line.find(string_mark) + len(string_mark):]
-        
-    closest_operator = sorted(operators, key=lambda op: rm_neg(line.find(op)))[0]
-    op_id = line.find(closest_operator)
+def get_operators(code, inside_string=False, string_mark=""):
+    """
+    Recursive function
+    Searches for operators (except calls) and stacks them into dictionary of format {name: num_of_occurences}
 
+    params:
+    code - string of code read from .py file
+    inside_string - marks for future recursive calls if code was passed with 0 pointer inside the string
+    string_mark - character or string that opens/closes current string. Empty if pointer not inside a string
+
+    returns dictionary of format {name: num_of_occurences}
+    """
+    # jump to the end of the string if we are inside one
+    if inside_string:
+        code = code[code.find(string_mark) + len(string_mark):]
+        
+    # closest operator as a string and op_id as it's position in the string
+    closest_operator = sorted(operators, key=lambda op: rm_neg(code.find(op)))[0]
+    op_id = code.find(closest_operator)
+
+    # if there are no operators, stop and return nothing
     if op_id == -1:
         return {}
 
-    string_border = min(rm_neg(line.find(quote)) for quote in string_borders)
+    # get closest mark of start/end of the string (multiline included)
+    string_border = min(rm_neg(code.find(quote)) for quote in string_borders)
     
+    # see if we are inside a string
     if string_border < op_id:
-        closest_quote = sorted(string_borders, key=lambda op: rm_neg(line.find(op)))[0]
-        return get_closest_operator2(line[string_border + len(closest_quote):], True, closest_quote)
+        closest_quote = sorted(string_borders, key=lambda op: rm_neg(code.find(op)))[0]
+        return get_operators(code[string_border + len(closest_quote):], True, closest_quote)
 
+    # add function name to functions list
     if closest_operator == 'def':
-        # print(line[op_id:line.find('\n', op_id)])
-        save_function(line[op_id:line.find('\n', op_id)])
+        save_function(code[op_id:code.find('\n', op_id)])
 
-
+    # concat current and recursive results to get full operators counter
     current_result = {get_alias(closest_operator): 1}
-    recursive_result = get_closest_operator2(line[op_id + len(closest_operator):])
+    recursive_result = get_operators(code[op_id + len(closest_operator):])
     return {k: current_result.get(k, 0) + recursive_result.get(k, 0) for k in set(current_result) | set(recursive_result)}
 
 
+
+# remove inline comments
 code = remove_inline_comments(code)
-pointer = 0
+
+# count operators
+result = get_operators(code)
+
+print ("[operators]")
+for x,z in result.items():
+    print (x + ":",z)
+
+# count calls
+for line in code.split("\n"):
+    parse_call(line)
+
+print ("calls:", number_of_calls)
+
+print ("N1:", sum(result.values()) + number_of_calls)
+
+# module = __import__("bc")
+
+# # ks = [k for k in dir(module) if (k[:2] != "__" and not callable(k))]
+# # def get_locals(ks):
+# #     for k in ks:
+# #         print("FUNCTION", k)
+# #         [print(k1) for k1 in getattr(module, k).__dict__ if (k1[:2] != "__" and not callable(k1))]
 
 
-# result = get_closest_operator2(code)
+# print(getattr(__import__("bc"), 'reflect'))
 
-# print("OPERATORS:", result)
-# print("FUNCTIONS:", functions)
+# # get_locals(ks)
+# # print(ks)
+
+# #print("FUNCTIONS:", functions)
+
+# #parse_call("heyhoi(args(args2))")
+# #print(number_of_calls)
+# #number_of_calls = 0
+# #parse_call("x = (1, 2)")
+# #print(number_of_calls)
+# # number_of_calls = 0
+# # parse_call("reflect(reflect)(reflect)(reflect)")
+# # print(number_of_calls)
+# # number_of_calls = 0
+
+# # parse_call("reflect(reflect)(reflect)")
