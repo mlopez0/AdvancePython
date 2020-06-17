@@ -1,12 +1,14 @@
-string_borders = [
+STRING_BORDERS = [
     '"""', 
     "'''", 
     '"', 
     "'"]
-inline_comment_borders = [
+
+INLINE_COMMENTS = [
     "#", 
     "\n"]
-operators = [
+
+KEYWORDS = [
     'if', 
     'elif', 
     'else', 
@@ -17,29 +19,107 @@ operators = [
     'def', 
     'import', 
     'except',
-    '+',
-    '-',
-    '**',
-    '*',
-    '/',
-    '==',
-    '!=',
-    '=',
 ]
 
-assignment = [
+BRACKETS = [
+    '(',
+    ')',
+    '[',
+    ']',
+    '{',
+    '}',
+]
+
+BLOCKS = [
+    *BRACKETS,
+]
+
+RESERVED = [
+    'False', 
+    'None', 
+    'True', 
+    'and', 
+    'as', 
+    'assert', 
+    'async', 
+    'await', 
+    'break', 
+    'class', 
+    'continue', 
+    'def', 
+    'del', 
+    'elif', 
+    'else', 
+    'except', 
+    'finally', 
+    'for', 
+    'from', 
+    'global', 
+    'if', 
+    'import', 
+    'in', 
+    'is', 
+    'lambda', 
+    'nonlocal', 
+    'not', 
+    'or', 
+    'pass', 
+    'raise', 
+    'return', 
+    'try', 
+    'while', 
+    'with', 
+    'yield'
+]
+
+
+ASSIGNMENT = [
+    '*=',
+    '/=',
+    '+=',
+    '-=',
     '='
 ]
 
-boolean = [
+BOOLEAN = [
     '==',
     '!='
 ]
 
-arithmetics = [
+ARITHMETICS = [
     '+',
     '-',
     '**',
     '*',
     '/',
+]
+
+OPERATORS = [
+    *BOOLEAN,
+    *ASSIGNMENT,
+    *ARITHMETICS,
+    
+]
+
+DELIMETERS = [
+    ' ',
+    '(',
+    ')',
+    ',',
+    '{',
+    '}',
+    '[',
+    ']',
+    ':',
+    *OPERATORS,
+    *ARITHMETICS,
+    *INLINE_COMMENTS,
+    *STRING_BORDERS,
+    *BOOLEAN,
+]
+
+CLOSING_BRACKETS = [
+    ')',
+    ']',
+    '}'
 ]

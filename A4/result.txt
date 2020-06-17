@@ -1,0 +1,393 @@
+def print_multiline_cell(lines, strip_line = False):
+    if not lines:
+        print("\tNone of this")
+        return
+
+    for line in lines:
+        line *= line if not strip_line else line.strip()
+        print("\t", line.replace("\n",""))
+    print()
+
+d 0
+{'indentifier': True, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': True, 'block': False, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': True, 'block': False, 'string': False}
+def
+
+p 4
+{'indentifier': True, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': True, 'block': False, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': True, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': False}
+print_multiline_cell
+
+( 24
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': True, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': True, 'string': False}
+
+
+l 25
+{'indentifier': True, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': True, 'block': False, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': True, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': False}
+lines
+
+, 30
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': False}
+
+
+s 32
+{'indentifier': True, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': True, 'block': False, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': True, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': False}
+strip_line
+
+= 43
+{'indentifier': False, 'delimiter': False, 'operator': True, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+=
+{'indentifier': False, 'delimiter': False, 'operator': True, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': False}
+=
+
+F 45
+{'indentifier': True, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': True, 'block': False, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': True, 'block': False, 'string': False}
+False
+
+) 50
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': True, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': True, 'string': False}
+
+
+: 51
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': False}
+
+
+i 57
+{'indentifier': True, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': True, 'block': False, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': True, 'block': False, 'string': False}
+if
+
+n 60
+{'indentifier': True, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': True, 'block': False, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': True, 'block': False, 'string': False}
+not
+
+l 64
+{'indentifier': True, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': True, 'block': False, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': True, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': False}
+lines
+
+: 69
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': False}
+
+
+p 79
+{'indentifier': True, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': True, 'block': False, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': True, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': False}
+print
+
+( 84
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': True, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': True, 'string': False}
+
+
+" 85
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': True}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': True}
+
+
+\ 86
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': False}
+\tNone
+
+o 93
+{'indentifier': True, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': True, 'block': False, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': True, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': False}
+of
+
+t 96
+{'indentifier': True, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': True, 'block': False, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': True, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': False}
+this
+
+" 100
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': True}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': True}
+
+
+) 101
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': True, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': True, 'string': False}
+
+
+r 111
+{'indentifier': True, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': True, 'block': False, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': True, 'block': False, 'string': False}
+return
+
+f 123
+{'indentifier': True, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': True, 'block': False, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': True, 'block': False, 'string': False}
+for
+
+l 127
+{'indentifier': True, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': True, 'block': False, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': True, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': False}
+line
+
+i 132
+{'indentifier': True, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': True, 'block': False, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': True, 'block': False, 'string': False}
+in
+
+l 135
+{'indentifier': True, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': True, 'block': False, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': True, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': False}
+lines
+
+: 140
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': False}
+
+
+l 150
+{'indentifier': True, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': True, 'block': False, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': True, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': False}
+line
+
+* 155
+{'indentifier': False, 'delimiter': False, 'operator': True, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+*=
+{'indentifier': False, 'delimiter': False, 'operator': True, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': False}
+*=
+
+= 156
+{'indentifier': False, 'delimiter': False, 'operator': True, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+=
+{'indentifier': False, 'delimiter': False, 'operator': True, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': False}
+=
+
+l 158
+{'indentifier': True, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': True, 'block': False, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': True, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': False}
+line
+
+i 163
+{'indentifier': True, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': True, 'block': False, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': True, 'block': False, 'string': False}
+if
+
+n 166
+{'indentifier': True, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': True, 'block': False, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': True, 'block': False, 'string': False}
+not
+
+s 170
+{'indentifier': True, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': True, 'block': False, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': True, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': False}
+strip_line
+
+e 181
+{'indentifier': True, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': True, 'block': False, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': True, 'block': False, 'string': False}
+else
+
+l 186
+{'indentifier': True, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': True, 'block': False, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': True, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': False}
+line
+
+s 191
+{'indentifier': True, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': True, 'block': False, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': True, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': False}
+strip
+
+( 196
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': True, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': True, 'string': False}
+
+
+) 197
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': True, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': True, 'string': False}
+
+
+p 207
+{'indentifier': True, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': True, 'block': False, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': True, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': False}
+print
+
+( 212
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': True, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': True, 'string': False}
+
+
+" 213
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': True}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': True}
+
+
+\ 214
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': False}
+\t
+
+" 216
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': True}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': True}
+
+
+, 217
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': False}
+
+
+l 219
+{'indentifier': True, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': True, 'block': False, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': True, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': False}
+line
+
+r 224
+{'indentifier': True, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': True, 'block': False, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': True, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': False}
+replace
+
+( 231
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': True, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': True, 'string': False}
+
+
+" 232
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': True}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': True}
+
+
+\ 233
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': False}
+\n
+
+" 235
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': True}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': True}
+
+
+, 236
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': False}
+
+
+" 237
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': True}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': True}
+
+
+" 238
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': True}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': True}
+
+
+) 239
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': True, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': True, 'string': False}
+
+
+) 240
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': True, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': True, 'string': False}
+
+
+p 246
+{'indentifier': True, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': True, 'block': False, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': True, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': False, 'string': False}
+print
+
+( 251
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': True, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': True, 'string': False}
+
+
+) 252
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': True, 'string': False}
+JUMP [' ', '(', ')', ',', '{', '}', '[', ']', ':', '.', '==', '!=', '*=', '/=', '+=', '-=', '=', '+', '-', '**', '*', '/', '+', '-', '**', '*', '/', '#', '\n', '"""', "'''", '"', "'", '==', '!=']
+{'indentifier': False, 'delimiter': False, 'operator': False, 'literal': False, 'comment': False, 'indent': False, 'keyword': False, 'block': True, 'string': False}
+
+
+indentifier
+['print_multiline_cell', 'lines', 'strip_line', 'lines', 'print', 'of', 'this', 'line', 'lines', 'line', 'line', 'strip_line', 'line', 'strip', 'print', 'line', 'replace', 'print']
+delimiter
+[]
+operator
+['=', '*=', '=']
+literal
+[]
+comment
+[]
+indent
+[]
+keyword
+['def', 'False', 'if', 'not', 'return', 'for', 'in', 'if', 'not', 'else']
+block
+['', '', '', '', '', '', '', '', '', '', '', '']
+string
+['', '', '', '', '', '', '', '']
+tokens
+['def', 'print_multiline_cell', '', 'lines', 'strip_line', '=', 'False', '', 'if', 'not', 'lines', 'print', '', '', 'of', 'this', '', '', 'return', 'for', 'line', 'in', 'lines', 'line', '*=', '=', 'line', 'if', 'not', 'strip_line', 'else', 'line', 'strip', '', '', 'print', '', '', '', 'line', 'replace', '', '', '', '', '', '', '', 'print', '', '']
