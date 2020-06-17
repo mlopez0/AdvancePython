@@ -1,27 +1,11 @@
-from enums import *
-import math
+import enums
 
-file = open("bc.py", "r")
+file = open('test.py', 'r')
 code = file.read()
+print(code)
+print()
 
 end = len(code)
-
-functions = []
-number_of_calls = 0
-
-
-def add_calls():
-    global number_of_calls
-    number_of_calls += 1
-
-
-def save_function(line):
-    """
-    Increments number of functions defined in code
-    """
-    name = line.replace("def", "")[:line.find("(") - 3].strip()
-    if not (name.startswith("__") and name.endswith("__")):
-        functions.append(name)
 
 
 def is_letter(char):
@@ -37,68 +21,92 @@ def is_digit(char):
     """
     return ord(char) >= 48 and ord(char) <= 56
 
-def find_closing_bracket(line):
-    """
-    Finds closing bracket (parentheses) for a line (skips internal parentheses)
-    """
-    if line.find("(") < line.find(")"):
-        return find_closing_bracket(line[line.find(")")+1:])
+
+class classes:
+    IDENTIFIER = 'indentifier'
+    DELIMITER = 'delimiter'
+    OPERATOR = 'operator'
+    LITERAL = 'literal'
+    COMMENT = 'comment'
+    INDENT = 'indent'
+    DEDENT = 'dedent'
+    NEWLINE = 'newline'
+    KEYWORD = 'keyword'
+    BLOCK = 'block'
+    STRING = 'string'
+
+
+state = {
+    classes.IDENTIFIER: False,
+    classes.DELIMITER: False,
+    classes.OPERATOR: False,
+    classes.LITERAL: False,
+    classes.COMMENT: False,
+    classes.INDENT: False,
+    classes.KEYWORD: False,
+    classes.BLOCK: False,
+    classes.STRING: False
+}
+
+tokens = {
+    classes.IDENTIFIER: False,
+    classes.DELIMITER: False,
+    classes.OPERATOR: False,
+    classes.LITERAL: False,
+    classes.COMMENT: False,
+}
+
+
+def change_state(key):
+    # global state
+    state.update({key: (not state.get(key))})
+
+
+def rbmult(iterator):
+    """Boolean reverse multiplicator? Returns True if all values are False"""
+    for element in iterator:
+        if element: return False
     
-    return line.find(")")
+    return True
 
 
-def allowed_caller(char):
-    """
-    Returns true if char is an allowed ending of the function name
-    """
-    return char ==")" or char=="_" or is_letter(char) or is_digit(char)
+def is_clean_state():
+    return rbmult(state.values())
 
 
-def parse_call(line):
-    """
-    Parses calls in a line of code. Doesn't work with nested (f()()) calls
-    """
-    if line.strip() == "":
-        return ""
+def clear_state():
+    for key in state.keys():
+        state.update({key: False})
 
-    # Find open brackets in line
-    open_brackets = line.find("(")
-    if (open_brackets) == -1:
+# print(is_clean_state())
+
+string_closure = None
+
+
+def set_string_closure(value):
+    global string_closure
+    string_closure = value
+
+
+def get_string_closure():
+    return string_closure
+
+
+def get_token_start(char, i):
+    if state[classes.STRING]:
+        if char == get_string_closure():
+            change_state(classes.STRING)
         return
+    elif is_letter(char):
+        change_state(classes.IDENTIFIER)
+        change_state(classes.KEYWORD)
+    elif is_digit(char) or (char in enums.STRING_BORDERS and not state.get(classes.LITERAL)):
+        change_state(classes.LITERAL)
+    elif char in enums.BLOCKS and not state.get(classes.BLOCK):
+        change_state(classes.BLOCK)
+    elif min([rm_neg(code.find(operator, i)) for operator in enums.OPERATORS]) == i:
+        change_state(classes.OPERATOR)
 
-    # Trim line to closing brackets
-    current_line = line[:find_closing_bracket(line[open_brackets + 1:])]
-    # i pointer to the end of string
-    i = len(line[:open_brackets-1])
-    # Get what inside the brackets
-    arguments = line[open_brackets + 1:find_closing_bracket(line[open_brackets + 1:])].split(",")
-    # Search for function name
-    while i != 0:
-        char = line[i]
-
-        # Check if function name found
-        if allowed_caller(char):
-            # Increment calls number
-            add_calls()
-            # Search calls in arguments
-            return search_calls_in_args(arguments)
-            
-        # Skip whitespaces
-        elif char == " ":
-            i -= 1
-        
-        # If it wasn't a call, search arguments for calls
-        # Also break loop early
-        elif not allowed_caller(char):
-            return search_calls_in_args(arguments)
-    
-    # Anyway we need it
-    return search_calls_in_args(arguments)
-
-
-def search_calls_in_args(args):
-    for arg in args:
-        parse_call(arg)
 
 
 def rm_neg(number):
@@ -111,141 +119,98 @@ def rm_neg(number):
     return number
 
 
-def parse_line_comment(line, inside_string=False, string_mark=""):
-    """
-    Find inline comment in a line and return inline comment as a string
-    """
-    if inside_string:
-        line = line[line.find(string_mark) + len(string_mark):]
-        
-    comment_char = line.find("#")
+def jump(i, strict_delimeters = None):
+    # print('JUMP', min([code.find(delimeter, i) for delimeter in enums.DELIMETERS]))
+    return min([rm_neg(code.find(delimeter, i)) for delimeter in (enums.DELIMETERS if not strict_delimeters else strict_delimeters)])
 
-    if comment_char == -1:
-        return ""
 
-    string_border = min(rm_neg(line.find(quote)) for quote in string_borders)
+def get_token(start, closing_marks = None):
+    end = jump(i, closing_marks)
+    return code[start:end], end
+
+
+def get_closing_marks(opening = None):
+    if not opening:
+        return None
     
-    if string_border < comment_char:
-        closest_quote = sorted(string_borders, key=lambda op: rm_neg(line.find(op)))[0]
-        return parse_line_comment(line[string_border + len(closest_quote):], True, closest_quote)
+    if opening in enums.STRING_BORDERS:
+        return opening
+    if opening in enums.BRACKETS:
+        return chr(ord(opening)+ (1 if opening == '(' else 2))
 
-    return line
+    return None
+
+# last_entry = -1
+results = { key: [] for key in state.keys() }
+results['tokens'] = []
+
+def get_only_state():
+    for key in state.keys():
+        if state.get(key):
+            return key
+
+
+def add_to_results(token):
+    results[get_only_state()].append(token)
+# tokens = []
+# keywords = []
+# indentifiers = []
+# literals = []
+opening_mark = None
+opening_mark_returns = -1
+calls = 0
+for i in range(len(code)):
+    char = code[i]
+
+    # print(char, i)
+    if char in [' ', '\n', '.']:
+        clear_state()
+
+        continue
+
     
-
-
-def remove_inline_comments(code):
-    """
-    Clean code from inline comments. Returns code without inline comments.
-    """
-    lines = code.split('\n')
-    for i in range(len(lines)):
-        
-        lines[i] = lines[i].replace(parse_line_comment(lines[i]), "")
-
-    return '\n'.join(lines)
-
-
-def get_alias(operator_name):
-    """
-    For operators no named as they are (+, ==, etc.) find corresponding name
-    """
-    if operator_name in arithmetics:
-        return 'arithmetics'
-    elif operator_name in boolean:
-        return 'logic'
-    elif operator_name in assignment:
-        return 'assignment'
-
-    return operator_name
-
-
-def get_operators(code, inside_string=False, string_mark=""):
-    """
-    Recursive function
-    Searches for operators (except calls) and stacks them into dictionary of format {name: num_of_occurences}
-
-    params:
-    code - string of code read from .py file
-    inside_string - marks for future recursive calls if code was passed with 0 pointer inside the string
-    string_mark - character or string that opens/closes current string. Empty if pointer not inside a string
-
-    returns dictionary of format {name: num_of_occurences}
-    """
-    # jump to the end of the string if we are inside one
-    if inside_string:
-        code = code[code.find(string_mark) + len(string_mark):]
-        
-    # closest operator as a string and op_id as it's position in the string
-    closest_operator = sorted(operators, key=lambda op: rm_neg(code.find(op)))[0]
-    op_id = code.find(closest_operator)
-
-    # if there are no operators, stop and return nothing
-    if op_id == -1:
-        return {}
-
-    # get closest mark of start/end of the string (multiline included)
-    string_border = min(rm_neg(code.find(quote)) for quote in string_borders)
+    get_token_start(char, i)
+    print(char, i)
     
-    # see if we are inside a string
-    if string_border < op_id:
-        closest_quote = sorted(string_borders, key=lambda op: rm_neg(code.find(op)))[0]
-        return get_operators(code[string_border + len(closest_quote):], True, closest_quote)
+    # if char == '"':
+    #     print(char in enums.STRING_BORDERS, state.get(classes.LITERAL))
+    # if char in enums.STRING_BORDERS and state.get(classes.LITERAL):
+    #     opening_mark = char
+    #     print(code[i] + 10)
 
-    # add function name to functions list
-    if closest_operator == 'def':
-        save_function(code[op_id:code.find('\n', op_id)])
+    
+    token, i = get_token(i, get_closing_marks(opening_mark))
 
-    # concat current and recursive results to get full operators counter
-    current_result = {get_alias(closest_operator): 1}
-    recursive_result = get_operators(code[op_id + len(closest_operator):])
-    return {k: current_result.get(k, 0) + recursive_result.get(k, 0) for k in set(current_result) | set(recursive_result)}
+    if char in enums.OPERATORS:
+        token = sorted(enums.OPERATORS, key=lambda op: rm_neg(code.find(op, i)))[0]
+        print(token)
+
+    if sum(state.values()) > 1:
+        if token in enums.RESERVED:
+            clear_state()
+            change_state(classes.KEYWORD)
+        else:
+            clear_state()
+            change_state(classes.IDENTIFIER)
+
+    print(state)
+
+    add_to_results(token)
+    results['tokens'].append(token)
+
+    print(token)
+    print()
+
+    # print(token)
 
 
+def print_list(name, iterator):
+    print('[' + name + ']')
+    print(iterator)
+    print()
 
-# remove inline comments
-code = remove_inline_comments(code)
-
-# count operators
-result = get_operators(code)
-
-print ("[operators]")
-for x,z in result.items():
-    print (x + ":",z)
-
-# count calls
-for line in code.split("\n"):
-    parse_call(line)
-
-print ("calls:", number_of_calls)
-
-# Get N1 (number of operators)
-N1 = sum(result.values()) + number_of_calls
-print ("N1:", N1)
-
-print('\n')
-print ("[operands]")
-print("-\n")
-
-# Derive complexity of the program
-def programF(n1,n2,N1,N2):
-    n = n1+n2
-    print ("Program vocabulary:", n)
-    N = N1 + N2
-    print ("Program length:", N)
-    L = n1*math.log(N1,2)+n2*math.log(N2,2)
-    print ("Calculated program length:", L)
-    V = N * math.log(n,2)
-    print ("Volume:", V)
-    D = (n1/2)*(N2/n2)
-    print ("Difficulty:", D)
-    E = D*V
-    print ("Effort:", E)
-
-print ("\n[program]")
-
-n1 = 20
-n2 = 5 #len(operands) ## Must pass the value of n2 instead of 5
-
-N2 = int(N1 * 1.2 ) # Sorry, we didn't manage to do that properly
-
-programF(n1, n2, N1, N2) ## Must pass the value of N2 instead of 20
+print('\n'.join([key + '\n' + str(results[key]) for key in results.keys()]))
+# print_list('tokens', tokens)
+# print_list('keywords', keywords)
+# print_list('literals', literals)
+# print_list('identifiers', indentifiers)
