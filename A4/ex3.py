@@ -126,5 +126,28 @@ N2 = inlinedocs + literals + entities + args + docs_num
 print("N2:", N2)
 
 
+import math
+
+# Derive complexity of the program
+def programF(n1,n2,N1,N2):
+    n = n1+n2
+    print ("vocabulary:", n)
+    N = N1 + N2
+    print ("length:", N)
+    L = n1*math.log(N1,2)+n2*math.log(N2,2)
+    print ("calc_length:", L)
+    V = N * math.log(n,2)
+    print ("volume:", V)
+    D = (n1/2)*(N2/n2)
+    print ("difficulty:", D)
+    E = D*V
+    print ("effort:", E)
+
+print ("\n[program]")
+
+n1 = 20
+n2 = 5 #len(operands) ## Must pass the value of n2 instead of 5
+
+programF(n1, n2, N1, N2) ## Must pass the value of N2 instead of 20
 
 
