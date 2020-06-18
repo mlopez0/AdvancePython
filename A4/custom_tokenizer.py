@@ -325,7 +325,6 @@ def tokenize(code_):
         if char == ',' and not prestate[c.STRING]:
             results['tokens'].append('|')
 
-        print(prestate, char)
         get_token_state(char, i)
 
         if i < skipper:
@@ -347,7 +346,6 @@ def tokenize(code_):
 
 
         token, skipper = get_token(i, get_closing_marks(get_string_closure()))
-        print(token)
         if state[c.OPERATOR]:
             token = sorted(enums.OPERATORS, key=lambda op: rm_neg(code.find(op, i)))[0]
             skipper = i + len(token)

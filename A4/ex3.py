@@ -9,9 +9,6 @@ code = sys.stdin.read()
 
 results = tokenize(code)
 
-print('=' * 10 + ' RESULTS ' + '=' * 10)
-print('\n\n'.join([key + '\n' + str(results[key]) for key in results.keys()]))
-
 print('[operators]')
 
 checked = []
