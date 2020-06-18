@@ -1,9 +1,9 @@
 Question #4
 
-Logarithms base 2 are bast used in maths and other fields; in computer science, the binary logarithms are used (log2) to compute the complexity.
-Logarithms are valuable for describing algorithms that divide a problem into smaller ones and join 
-the solutions of the subproblems. 
-The logarithm difference between two small numbers is large, although the logarithm difference between two large numbers is small. 
+In computer science, binary logarithms are used (log2) to compute complexity.
+Logarithms are valuable for describing algorithms that divide a problem into smaller ones and join the solutions of the subproblems. (Divide and conquer).
 
+Something else can be used... We can also make an estimation based on Zipf's law using the equation n = t(E+ln(t)) where E=0.5772, which is the Euler constant.
+Although those two-length estimations have equations of a different form (Halstead and Zipfs), they produce the same length estimation.
 
-
+Since logarithm is another way of writing exponential equations that allows split the exponent a part of the equation. As complexity problems increase, the complexity may also rise exponentially.
