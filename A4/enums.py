@@ -8,7 +8,7 @@ INLINE_COMMENTS = [
     "#", 
     "\n"]
 
-KEYWORDS = [
+ASSIGNMENT_OPERATORS = [
     'if', 
     'elif', 
     'else', 
@@ -83,7 +83,11 @@ ASSIGNMENT = [
 
 BOOLEAN = [
     '==',
-    '!='
+    '!=',
+    '>=',
+    '<=',
+    '>',
+    '<',
 ]
 
 ARITHMETICS = [
@@ -110,6 +114,7 @@ DELIMETERS = [
     '}',
     '[',
     ']',
+    '\\',
     ':',
     *OPERATORS,
     *ARITHMETICS,
@@ -123,3 +128,4 @@ CLOSING_BRACKETS = [
     ']',
     '}'
 ]
+
