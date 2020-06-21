@@ -7,6 +7,9 @@ from custom_tokenizer.custom_tokenizer import tokenize
 from custom_tokenizer.custom_token_classes import classes as c
 from custom_tokenizer import enums
 from functools import wraps
+import matplotlib.pyplot as plt
+import matplotlib.patheffects as path_effects
+from matplotlib.backends.backend_pdf import PdfPages
 
 class Capturing(list):
     def __enter__(self):
@@ -247,5 +250,87 @@ def stat_complexity(function):
     
     return wrapper
 
+def plotterRep(_dict,_title,_xlable, _ptype):
 
-# stat_object(stat_complexity(foo))
+    if _ptype==1:
+        names = list(_dict.keys())
+        values = list(_dict.values())
+
+        fig, axs = plt.subplots()
+        axs.bar(names, values)
+
+        axs.set_title(_title)
+#        axs.set_xlabel(_xlable)
+
+    #    plt.show()
+        pp = PdfPages('report.pdf')
+        text = '-- Page 1 --'
+        fig.text(0.5,0.02, text, ha='center', fontsize=18)
+        pp.savefig(fig)
+        pp.close()
+    else:
+        fig = plt.figure(figsize=(7, 1))
+        text = fig.text(0.5, 0.5, 'This text stands out because of\n'
+                                  'its black border.', color='white',
+                                  ha='center', va='center', size=30)
+        text.set_path_effects([path_effects.Stroke(linewidth=3, foreground='black'), path_effects.Normal()])
+#        plt.show()
+
+        pp = PdfPages('foo2.pdf')
+        pp.savefig(fig)
+        pp.close()
+
+
+
+def report_object(function):
+    # @wraps(function)
+    if type(function) is tuple:
+        function = function[0]
+        print(function[1])
+        
+
+    def wrapper(*args, **kwrd):
+        with Capturing() as output:
+            function(*args, **kwrd)
+
+        result = {}
+
+        result['name'] = function.__name__
+        result['type'] = type(function)
+        result['sign'] = inspect.signature(function)
+        result['args'] = locals()['args']
+        result['kwrd'] = locals()['kwrd']
+        result['doc'] = function.__doc__
+        result['source'] = inspect.getsource(function)
+        result['output'] = output
+
+        return function
+
+    return wrapper
+
+
+def report_complexity(function):
+    def wrapper(*args, **kwrd):
+        result = {}
+        analysis = StaticAnalysis(function)
+
+        title = 'This is the title for the first'
+        xlable = 'This is the x lable dammm'
+        ptype = 1
+
+        result['vocabulary'] = analysis.calc_vocabulary()
+        result['length'] = analysis.calc_length()
+        result['calc_length'] = analysis.calc_calc_length()
+        result['volume'] = analysis.calc_volume()
+        result['difficulty'] = analysis.calc_difficulty()
+        result['effort'] = analysis.calc_effort()
+
+        function(*args, **kwrd)
+#        print(result)
+
+        plotterRep(result, title,xlable,ptype)
+
+
+
+    return wrapper
+
