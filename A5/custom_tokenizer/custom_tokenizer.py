@@ -1,5 +1,5 @@
-import enums
-from custom_token_classes import classes as c
+from custom_tokenizer import enums
+from custom_tokenizer.custom_token_classes import classes as c
 
 
 code = ""
