@@ -3,6 +3,7 @@ from io import StringIO
 import sys
 import dis
 import math
+import os
 from custom_tokenizer.custom_tokenizer import tokenize
 from custom_tokenizer.custom_token_classes import classes as c
 from custom_tokenizer import enums
@@ -125,12 +126,15 @@ class StaticAnalysis:
         counter = 0
         tokens = self.results['tokens']
         for i in range(len(tokens)):
-            if tokens[i] in self.results[c.CALLABLE] and tokens[i-1] not in ['def','class'] and tokens[i+1] == '(':
-                if tokens[i+2] != ')':
-                    counter += len(self.get_args(tokens[i+2:]))
+            try:
+                if tokens[i] in self.results[c.CALLABLE] and tokens[i-1] not in ['def','class'] and tokens[i+1] == '(':
+                    if tokens[i+2] != ')':
+                        counter += len(self.get_args(tokens[i+2:]))
 
-            elif tokens[i] in self.results[c.IDENTIFIER] and tokens[i+1].startswith('['):
-                    counter += 1
+                elif tokens[i] in self.results[c.IDENTIFIER] and tokens[i+1].startswith('['):
+                        counter += 1
+            except IndexError:
+                continue
 
         return counter
     
@@ -172,7 +176,8 @@ class StaticAnalysis:
         return self.N1 + self.N2
 
     def calc_calc_length(self):
-        if not self.N1 * self.N2 == 0:
+        if not self.N1 <=0 or self.N2 <= 0:
+            # print(self.N1, self.N2)
             return self.n1 * math.log(self.N1,2) + self.n2 * math.log(self.N2,2)
 
         return 0
@@ -188,16 +193,15 @@ class StaticAnalysis:
 
 
 def stat_object(function):
-    # @wraps(function)
-    if type(function) is tuple:
-        function = function[0]
-        print(function[1])
+    # sys.stdout = open(os.devnull, "w")
+    # sys.stdout = sys.__stdout__
+    # if type(function) is tuple:
+    #     function = function[0]
+    #     print(function[1])
         
-
+    @wraps(function)
     def wrapper(*args, **kwrd):
-        with Capturing() as output:
-            function(*args, **kwrd)
-
+        # output = []
         result = {}
 
         result['name'] = function.__name__
@@ -207,16 +211,29 @@ def stat_object(function):
         result['kwrd'] = locals()['kwrd']
         result['doc'] = function.__doc__
         result['source'] = inspect.getsource(function)
+
+        with Capturing() as output:
+            function(*args, **kwrd)
+            pass
+
         result['output'] = output
 
-        print(result)
-        return function
+        redirect_output(result)
+        
+        return function(*args, **kwrd)
 
+    sys.stdout = sys.__stdout__
     return wrapper
 
 
 def stat_complexity(function):
+    
+    sys.stdout = open(os.devnull, "w")
+    @wraps(function)
     def wrapper(*args, **kwrd):
+        # with Capturing() as output:
+        #     function(*args, **kwrd)
+
         result = {}
         analysis = StaticAnalysis(function)
         result['operators'] = {}
@@ -241,11 +258,24 @@ def stat_complexity(function):
         result['program']['volume'] = analysis.calc_volume()
         result['program']['difficulty'] = analysis.calc_difficulty()
         result['program']['effort'] = analysis.calc_effort()
-
-        function(*args, **kwrd)
-        print(result)
+        # function(*args, **kwrd)
+        redirect_output(result)
+        
+        return function(*args, **kwrd)
     
+    sys.stdout = sys.__stdout__
     return wrapper
 
+
+results = []
+
+# def add_result(result):
+#     results.append(result)
+
+def redirect_output(msg):
+    sys.stdout = sys.__stdout__
+    # sys.stdout.write(str(msg))
+    print(str(msg))
+    sys.stdout = open(os.devnull, "w")
 
 # stat_object(stat_complexity(foo))
