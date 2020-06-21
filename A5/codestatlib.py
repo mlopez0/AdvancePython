@@ -250,7 +250,7 @@ def stat_complexity(function):
     
     return wrapper
 
-def plotterRep(_dict,_title,_xlable, _ptype):
+def plotterRep(_dict,_title, _ptype):
 
     if _ptype==1:
         names = list(_dict.keys())
@@ -270,16 +270,17 @@ def plotterRep(_dict,_title,_xlable, _ptype):
         pp.close()
     else:
         fig = plt.figure(figsize=(7, 1))
-        text = fig.text(0.5, 0.5, 'This text stands out because of\n'
-                                  'its black border.', color='white',
+        text = fig.text(0.5, 0.5, 'This is output of data\n'
+                                  'No graph required.', color='white',
                                   ha='center', va='center', size=30)
         text.set_path_effects([path_effects.Stroke(linewidth=3, foreground='black'), path_effects.Normal()])
 #        plt.show()
+        text = '-- Page 1 --'
+        fig.text(0.5,0.02, text, ha='center', fontsize=18)
 
-        pp = PdfPages('foo2.pdf')
+        pp = PdfPages('foo.pdf')
         pp.savefig(fig)
         pp.close()
-
 
 
 def report_object(function):
@@ -304,7 +305,20 @@ def report_object(function):
         result['source'] = inspect.getsource(function)
         result['output'] = output
 
+#        print(result)
+
+        _title = "Object Report"
+#        _xlable = ''
+        _ptype = 2
+
+        plotterRep(result,_title, _ptype)
+
+
         return function
+
+
+
+
 
     return wrapper
 
@@ -313,10 +327,6 @@ def report_complexity(function):
     def wrapper(*args, **kwrd):
         result = {}
         analysis = StaticAnalysis(function)
-
-        title = 'This is the title for the first'
-        xlable = 'This is the x lable dammm'
-        ptype = 1
 
         result['vocabulary'] = analysis.calc_vocabulary()
         result['length'] = analysis.calc_length()
@@ -327,10 +337,11 @@ def report_complexity(function):
 
         function(*args, **kwrd)
 #        print(result)
+        _title = "Complexity Report"
+#        _xlable = ''
+        _ptype = 1
 
-        plotterRep(result, title,xlable,ptype)
-
+        plotterRep(result,_title, _ptype)
 
 
     return wrapper
-
