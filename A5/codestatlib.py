@@ -261,9 +261,7 @@ def plotterRep(_dict,_title, _ptype):
         axs.bar(names, values)
 
         axs.set_title(_title)
-    #    axs.set_xlabel(_xlable)
-    #    plt.show()
-        plt.rcParams["font.family"] = "monospace"    
+        plt.rcParams["font.family"] = "monospace"       # Assignment requirement
         pp = PdfPages('report.pdf')
         text = '-- Page 1 --'
         fig.text(0.5,0.02, text, ha='center', fontsize=18)
@@ -272,25 +270,20 @@ def plotterRep(_dict,_title, _ptype):
     else:
         names = list(_dict.keys())
         values = list(_dict.values())
+        _strcompleta = ''#_title + "\n\n\n"
+
+        for keys,values in _dict.items():
+            _strcompleta = _strcompleta + str(keys) + " : " +str(values) + '\n'
 
         fig = plt.figure(figsize=(8, 9))
-        plt.rcParams["font.family"] = "monospace"    
-#        axs.bar(names, values)
-#        axs.set_title(_title)
+        plt.rcParams["font.family"] = "monospace"       # Assignment requirement
 
-        text = fig.text(0.5, 0.5, names+ values, color='black',
-                                  ha='center', va='center', size=12)
-#        text.set_path_effects([path_effects.Stroke(linewidth=3, foreground='black'), path_effects.Normal()])
-
-#        plt.rc('text', usetex=False)
-#        plt.figure(figsize=(8, 6))
-#        x = np.arange(0, 5, 0.1)
-#        plt.plot(x, np.sin(x), 'b-')
-#        plt.title('Page Two')
-#        plt.show()
-
+        text = fig.text(0.1, 0.5, _strcompleta, color='black',
+                                  ha='left', va='center', size=12)
         text = '-- Page 1 --'
         fig.text(0.5,0.02, text, ha='center', fontsize=18)
+        text = _title
+        fig.text(0.5,0.9, text, ha='center', fontsize=18)
 
         pp = PdfPages('foo.pdf')
         pp.savefig(fig)
@@ -346,6 +339,5 @@ def report_complexity(function):
         _ptype = 1
 
         plotterRep(result,_title, _ptype)
-
 
     return wrapper
