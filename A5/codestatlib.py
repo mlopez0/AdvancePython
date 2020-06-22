@@ -10,6 +10,7 @@ from functools import wraps
 import matplotlib.pyplot as plt
 import matplotlib.patheffects as path_effects
 from matplotlib.backends.backend_pdf import PdfPages
+import numpy as np
 
 class Capturing(list):
     def __enter__(self):
@@ -260,21 +261,34 @@ def plotterRep(_dict,_title, _ptype):
         axs.bar(names, values)
 
         axs.set_title(_title)
-#        axs.set_xlabel(_xlable)
-
+    #    axs.set_xlabel(_xlable)
     #    plt.show()
+        plt.rcParams["font.family"] = "monospace"    
         pp = PdfPages('report.pdf')
         text = '-- Page 1 --'
         fig.text(0.5,0.02, text, ha='center', fontsize=18)
         pp.savefig(fig)
         pp.close()
     else:
-        fig = plt.figure(figsize=(7, 1))
-        text = fig.text(0.5, 0.5, 'This is output of data\n'
-                                  'No graph required.', color='white',
-                                  ha='center', va='center', size=30)
-        text.set_path_effects([path_effects.Stroke(linewidth=3, foreground='black'), path_effects.Normal()])
+        names = list(_dict.keys())
+        values = list(_dict.values())
+
+        fig = plt.figure(figsize=(8, 9))
+        plt.rcParams["font.family"] = "monospace"    
+#        axs.bar(names, values)
+#        axs.set_title(_title)
+
+        text = fig.text(0.5, 0.5, names+ values, color='black',
+                                  ha='center', va='center', size=12)
+#        text.set_path_effects([path_effects.Stroke(linewidth=3, foreground='black'), path_effects.Normal()])
+
+#        plt.rc('text', usetex=False)
+#        plt.figure(figsize=(8, 6))
+#        x = np.arange(0, 5, 0.1)
+#        plt.plot(x, np.sin(x), 'b-')
+#        plt.title('Page Two')
 #        plt.show()
+
         text = '-- Page 1 --'
         fig.text(0.5,0.02, text, ha='center', fontsize=18)
 
@@ -289,13 +303,11 @@ def report_object(function):
         function = function[0]
         print(function[1])
         
-
     def wrapper(*args, **kwrd):
         with Capturing() as output:
             function(*args, **kwrd)
 
         result = {}
-
         result['name'] = function.__name__
         result['type'] = type(function)
         result['sign'] = inspect.signature(function)
@@ -306,19 +318,11 @@ def report_object(function):
         result['output'] = output
 
 #        print(result)
-
         _title = "Object Report"
 #        _xlable = ''
         _ptype = 2
-
         plotterRep(result,_title, _ptype)
-
-
         return function
-
-
-
-
 
     return wrapper
 
