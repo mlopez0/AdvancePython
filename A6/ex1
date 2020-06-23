@@ -1,0 +1,36 @@
+*****-- Draft of the answers, once completed We must move into a PDF File *****
+
+(a) What is algebraic expression? How does it differs from mathematical formula?
+
+An algebraic expression is an expression built up from integer constants, variables, and the algebraic operations (addition, subtraction, multiplication, division, and exponentiation by an exponent that is a rational number)
+
+Algebra expression also introduces the concept of variables, which allows an unknown quantity to be represented by a single letter, hence the convenience of manipulation in applications.
+
+A mathematical formula shows the relationship between two or more variables, is a calculation for a specific purpose and is always true, subject to certain conditions, no matter the inputs.
+
+(b) What is term rewriting? Is it the same as symbolic computation?
+
+Rewriting is a method of replacing subterms of a formula (Well-formed formula) with other terms.
+
+Symbolic computation is capable of performing operations, like simplification of expressions, differentiation using chain rule, polynomial factorization, indefinite integration, etc. 
+
+[Same as symbolic computation, I guess yes. ]
+
+(c) What is symbolic computation comparing with numerical computation?
+
+Symbolic computation is an exact computation with expressions containing variables with no given value and manipulated as symbols. Contrary to numerical computation, which uses numerical approximations.
+
+(d) What is the difference between evaluation and interpretation (in math sense)?
+An evaluation is the completion of a mathematical operation by finding the value of the expression when the variable is replaced by a given number. 
+
+Interpretation gives a value (meaning) to mathematical expression (symbols, formulas, etc.) In mathematics, such values are mathematical objects (sets, operations, expressions, etc.). The value itself is called an interpretation of the corresponding expression.
+
+(e) What is lazy evaluation comparing with eager evaluation?
+
+Lazy evaluation is an evaluation strategy that holds the evaluation of an expression until its value is needed. 
+Comparing with eager evaluation, lazy evaluation allows the language runtime to discard sub-expressions that are not directly linked to the final result of the expression.
+Lazy evaluation also allows faster computations and enable the programmer to access components of data structures out-of-order after initializing them, as long as they are free from any circular dependencies.
+
+(f) How functional programming related to algebra systems?
+
+(g) Is lambda function in Python a replacement for symbolic computation? If yes, why? If not, why not? Provide at least two examples.
