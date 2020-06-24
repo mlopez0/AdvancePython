@@ -8,6 +8,10 @@ from custom_tokenizer.custom_tokenizer import tokenize
 from custom_tokenizer.custom_token_classes import classes as c
 from custom_tokenizer import enums
 from functools import wraps
+import matplotlib.pyplot as plt
+import matplotlib.patheffects as path_effects
+from matplotlib.backends.backend_pdf import PdfPages
+import numpy as np
 
 class Capturing(list):
     def __enter__(self):
@@ -266,16 +270,92 @@ def stat_complexity(function):
     sys.stdout = sys.__stdout__
     return wrapper
 
+def plotterRep(_dict,_title, _ptype):
+    if _ptype==1:
+        names = list(_dict.keys())
+        values = list(_dict.values())
 
-results = []
+        fig, axs = plt.subplots()
+        axs.bar(names, values)
 
-# def add_result(result):
-#     results.append(result)
+        axs.set_title(_title)
+        plt.rcParams["font.family"] = "monospace"       # Assignment requirement
+        pp = PdfPages('report.pdf')
+        text = '-- Page 1 --'
+        fig.text(0.5,0.02, text, ha='center', fontsize=18)
+        pp.savefig(fig)
+        pp.close()
+    else:
+        names = list(_dict.keys())
+        values = list(_dict.values())
+        _strcompleta = ''#_title + "\n\n\n"
 
-def redirect_output(msg):
-    sys.stdout = sys.__stdout__
-    # sys.stdout.write(str(msg))
-    print(str(msg))
-    sys.stdout = open(os.devnull, "w")
+        for keys,values in _dict.items():
+            _strcompleta = _strcompleta + str(keys) + " : " +str(values) + '\n'
 
-# stat_object(stat_complexity(foo))
+        fig = plt.figure(figsize=(8, 9))
+        plt.rcParams["font.family"] = "monospace"       # Assignment requirement
+
+        text = fig.text(0.1, 0.5, _strcompleta, color='black',
+                                  ha='left', va='center', size=12)
+        text = '-- Page 1 --'
+        fig.text(0.5,0.02, text, ha='center', fontsize=18)
+        text = _title
+        fig.text(0.5,0.9, text, ha='center', fontsize=18)
+
+        pp = PdfPages('foo.pdf')
+        pp.savefig(fig)
+        pp.close()
+
+
+def report_object(function):
+    # @wraps(function)
+    if type(function) is tuple:
+        function = function[0]
+        print(function[1])
+        
+    def wrapper(*args, **kwrd):
+        with Capturing() as output:
+            function(*args, **kwrd)
+
+        result = {}
+        result['name'] = function.__name__
+        result['type'] = type(function)
+        result['sign'] = inspect.signature(function)
+        result['args'] = locals()['args']
+        result['kwrd'] = locals()['kwrd']
+        result['doc'] = function.__doc__
+        result['source'] = inspect.getsource(function)
+        result['output'] = output
+
+#        print(result)
+        _title = "Object Report"
+#        _xlable = ''
+        _ptype = 2
+        plotterRep(result,_title, _ptype)
+        return function
+
+    return wrapper
+
+
+def report_complexity(function):
+    def wrapper(*args, **kwrd):
+        result = {}
+        analysis = StaticAnalysis(function)
+
+        result['vocabulary'] = analysis.calc_vocabulary()
+        result['length'] = analysis.calc_length()
+        result['calc_length'] = analysis.calc_calc_length()
+        result['volume'] = analysis.calc_volume()
+        result['difficulty'] = analysis.calc_difficulty()
+        result['effort'] = analysis.calc_effort()
+
+        function(*args, **kwrd)
+#        print(result)
+        _title = "Complexity Report"
+#        _xlable = ''
+        _ptype = 1
+
+        plotterRep(result,_title, _ptype)
+
+    return wrapper
