@@ -14,11 +14,7 @@ def is_digit(symbol):
             return False
     return True
 
-def is_variable(symbol):
-    char = symbol[0]
-    return (ord(char) <= 122 and ord(char) >= 97) or (ord(char) <= 90 and ord(char) >= 65)
-
-
+    
 def get_result(result,candidate):
     if is_digit(candidate):
         return candidate
