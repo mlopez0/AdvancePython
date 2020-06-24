@@ -359,3 +359,13 @@ def report_complexity(function):
         plotterRep(result,_title, _ptype)
 
     return wrapper
+
+
+def rc(multipage=True, filename='report.pdf', papersize='a4'):
+    global _multipage
+    global _filename
+    global _papersize
+
+    _multipage = multipage
+    _filename = filename
+    _papersize = papersize
