@@ -11,7 +11,6 @@ def check_arguments():
 
 check_arguments()
 
-
 storage = []
 
 def throw_error():
@@ -27,6 +26,18 @@ def is_digit(symbol):
         if not (ord(char) >= 48 and ord(char) <= 56):
             return False
     return True
+
+def is_space(symbol):
+    """
+    Returns true if char is space
+    """
+    char = symbol
+    print (char)
+    if (ord(char) == 13):
+        print ("putos todos")
+        return False
+    return True
+
 
 def is_variable(symbol):
     char = symbol[0]
@@ -79,6 +90,7 @@ def parse_string(string):
 
 
 def parse_brackets(string): 
+
     brackets_start = 0
 
     while True:
@@ -101,6 +113,8 @@ def parse_brackets(string):
 def get_input():
     print('>>> ', end='')
     expression = input()
+    if not expression: 
+        get_input()
     parse_brackets(expression)
 
 get_input()
