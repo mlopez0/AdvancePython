@@ -17,6 +17,9 @@ def throw_error():
     print('err: invalid expression')
     get_input()
 
+def empty_input(expression): # Empty string validator
+    if expression.strip():
+        return True
 
 def is_digit(symbol):
     """
@@ -97,12 +100,13 @@ def parse_brackets(string):
     # print(storage)
     get_input()
 
-
 def get_input():
     print('>>> ', end='')
     expression = input()
-    if not expression: 
+
+    if not empty_input(expression):
         get_input()
+
     parse_brackets(expression)
 
 get_input()
