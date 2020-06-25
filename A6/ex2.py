@@ -27,18 +27,6 @@ def is_digit(symbol):
             return False
     return True
 
-def is_space(symbol):
-    """
-    Returns true if char is space
-    """
-    char = symbol
-    print (char)
-    if (ord(char) == 13):
-        print ("putos todos")
-        return False
-    return True
-
-
 def is_variable(symbol):
     char = symbol[0]
     return (ord(char) <= 122 and ord(char) >= 97) or (ord(char) <= 90 and ord(char) >= 65)
