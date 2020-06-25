@@ -1,3 +1,17 @@
+import sys
+
+_nparam = len(sys.argv)
+
+def check_arguments():
+    if _nparam==2:
+        if sys.argv[1] == "-h":
+            print("This program support the following operations:")
+            print("\t - Addition \n \t - Subtraction")
+            exit()
+
+check_arguments()
+
+
 storage = []
 
 def throw_error():
