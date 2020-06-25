@@ -1,9 +1,25 @@
+import sys
+
+_nparam = len(sys.argv)
+
+def check_arguments():
+    if _nparam==2:
+        if sys.argv[1] == "-h":
+            print("This program support the following operations:")
+            print("\t - Addition \n \t - Subtraction")
+            exit()
+
+check_arguments()
+
 storage = []
 
 def throw_error():
     return 'err: invalid expression'
     # get_input()
 
+def empty_input(expression): # Empty string validator
+    if expression.strip():
+        return True
 
 def is_digit(symbol):
     """
@@ -153,6 +169,7 @@ def parse_string(string):
 
 
 def parse_brackets(string): 
+
     brackets_start = 0
 
     while True:
@@ -175,10 +192,13 @@ def parse_brackets(string):
     
     # get_input()
 
-
 def get_input():
     print('>>> ', end='')
     expression = input()
+
+    if not empty_input(expression):
+        get_input()
+
     parse_brackets(expression)
 
 # get_input()
