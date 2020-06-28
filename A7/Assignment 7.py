@@ -64,7 +64,7 @@ b("a", "b")
 # 1. Does lambda restrict side effects?
 #   Yes, lambdas is that they cannot contain anything besides an expression. 
 #   It's nearly impossible for a lambda expression to produce anything besides trivial side effects, 
-#   since it cannot have anywhere near as rich a body as a def'ed function.
+#   since it cannot have anywhere near as rich a body as a "def" function.
 #
 # 2. Does lambda restrict number of allowed statements?
 # - Yes, It is not possible to have multiples statements in lambda
@@ -106,4 +106,6 @@ f((1,2,3))((4,5,6)))()
 # [multiline code interlaced with comments]
 
 # 2. Why does map() requires list() call?
-# [written answer]
+#   Because it returns an iterator, it omit storing the full size list in the memory. 
+#   So that you can easily iterate over it in the future not making any pain to memory. 
+#   Possibly a full list is not even needed, but the part of it, until the condition is reached.
