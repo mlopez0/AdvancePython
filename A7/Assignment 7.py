@@ -56,16 +56,44 @@ b("a", "b")
 # Task 4 (soft)
 # ----------------------------------------------
 # What are the main restrictions on the lambda?
+# - The main limitation of lambda expression is they can contain only a single expression 
+#   and this expression has to be written on a single line
+#
 # Provide "If yes, why? If not, why not?" for each of the following:
+#
 # 1. Does lambda restrict side effects?
+#   Yes, lambdas is that they cannot contain anything besides an expression. 
+#   It's nearly impossible for a lambda expression to produce anything besides trivial side effects, 
+#   since it cannot have anywhere near as rich a body as a def'ed function.
+#
 # 2. Does lambda restrict number of allowed statements?
+# - Yes, It is not possible to have multiples statements in lambda
+#
 # 3. Does lambda restrict assignments? 
+# - Yes, Assignment statements cannot be used in lambda. In Python, 
+#   assignment statements don’t return anything, not even None (null).
+# 
 # 4. Does lambda restrict number of return values?
+# - Yes, lambda can't return complex statements, only expressions
+#   >>> lambda: if True: 0
+#     File "<stdin>", line 1
+#       lambda: if True: 0
+#                ^
+#   SyntaxError: invalid syntax
+#
 # 5. Does lambda restrict the use of default arguments values? 
+# - Yes, One or more variables appearing in the expression may be declared previously. 
+#   But if it’s there in the arguments, either it should have a default value or must be passed as an argument to the call.
+#    >>> a,b=1,2
+#    >>> y=lambda a,b:a+b
+#    >>> y()
+#Traceback (most recent call last):
+#    File “<pyshell#167>”, line 1, in <module>
+#    y()
+#    TypeError: <lambda>() missing 2 required positional arguments: ‘a’ and ‘b’
+#
 # 6. Does lambda restrict possible function signatures?
-
-# [your enumerated answers; if possible, code is welcomed]
-
+# - No, Lambda's take the same signature as regular functions
 
 # Task 5
 # ----------------------------------------------
