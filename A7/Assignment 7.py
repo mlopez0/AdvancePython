@@ -103,7 +103,19 @@ f((1,2,3))((4,5,6)))()
 
 # 1. What happens here? Do the same as in Task 3 and
 # enumerate order of execution using (1,2,3...) in comments
-# [multiline code interlaced with comments]
+
+def func_a(a):
+    def func_b(b):                          # 3
+        def lmab_f(x):                      # 5
+            return x + x                    # 7
+        print(list(map(lmab_f, a + b)))     # 6
+
+    return func_b                           # 4
+
+def full_func(f=func_a):
+    return f((1, 2, 3))((4, 5, 6))          # 2
+
+full_func()                                 # 1
 
 # 2. Why does map() requires list() call?
 #   Because it returns an iterator, it omit storing the full size list in the memory. 
